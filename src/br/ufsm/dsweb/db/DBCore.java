@@ -64,7 +64,7 @@ public class DBCore {
 		}
 		try {
 			FileWriter fw = new FileWriter(filename, true);
-			fw.write(row);
+			fw.write(row+"\n");
 			fw.close();
 		} catch(Exception e) {
 			e.printStackTrace();
