@@ -74,4 +74,9 @@ public class DBActions {
 	public static Tweet getTweetByID(int tweet_id) {
 		return (Tweet) getModelByID(ModelType.TWEET, tweet_id);
 	}
+	
+	public static boolean usernameExists(String username) {
+		String r = DBCore.getRowByCol(filenameForModelType(ModelType.USER), 2, username); 
+		return r != null && !r.equals("");
+	}
 }
