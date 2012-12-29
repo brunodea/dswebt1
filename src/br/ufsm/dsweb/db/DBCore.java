@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class DBCore {
-	private static String DB_PATH = "db/";
+	private static String DB_PATH = "";
 
 	private interface RowReader {
 		public boolean doSomething(String row, boolean has_next);
