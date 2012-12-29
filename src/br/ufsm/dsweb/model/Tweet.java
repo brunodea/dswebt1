@@ -3,15 +3,14 @@ package br.ufsm.dsweb.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import br.ufsm.dsweb.db.DBActions;
+import br.ufsm.dsweb.util.Util;
+
 public class Tweet extends Model implements Serializable {
 	private User user;
-	private Date pub_date;
+	private Date pubdate;
 	private String content;
 	
-	public Tweet(int id) {
-		super(id);
-	}
-
 	public User getUser() {
 		return user;
 	}
@@ -20,12 +19,12 @@ public class Tweet extends Model implements Serializable {
 		this.user = user;
 	}
 
-	public Date getPub_date() {
-		return pub_date;
+	public Date getPubdate() {
+		return pubdate;
 	}
 
-	public void setPub_date(Date pub_date) {
-		this.pub_date = pub_date;
+	public void setPubdate(Date pubdate) {
+		this.pubdate = pubdate;
 	}
 
 	public String getContent() {
@@ -34,5 +33,19 @@ public class Tweet extends Model implements Serializable {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	@Override
+	public String toCSV() {
+		return getID()+","+getUser().getID()+","+Util.dateToString(getPubdate())+","+getContent();
+	}
+
+	@Override
+	public void fromCSV(String csv) {
+		String[] vals = csv.split(",");
+		setID(Integer.parseInt(vals[0]));
+		setUser(DBActions.getUserByID(Integer.parseInt(vals[1])));
+		setPubdate(Util.stringToDate(vals[2]));
+		setContent(vals[3]);
 	}
 }

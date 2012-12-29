@@ -11,11 +11,7 @@ public class User extends Model implements Serializable {
 	private String fullname;
 	private String username;
 	private String password;
-
-	public User(int id) {
-		super(id);
-	}
-
+	
 	public String getFullname() {
 		return fullname;
 	}
@@ -38,5 +34,19 @@ public class User extends Model implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public String toCSV() {
+		return getID()+","+getFullname()+","+getUsername()+","+getPassword();
+	}
+
+	@Override
+	public void fromCSV(String csv) {
+		String[] vals = csv.split(",");
+		setID(Integer.parseInt(vals[0]));
+		setFullname(vals[1]);
+		setUsername(vals[2]);
+		setPassword(vals[3]);
 	}
 }
