@@ -12,6 +12,10 @@ public class User extends Model implements Serializable {
 	private String username;
 	private String password;
 	
+	public User() {
+		setType(ModelType.USER);
+	}
+	
 	public String getFullname() {
 		return fullname;
 	}

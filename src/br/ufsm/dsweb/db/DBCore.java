@@ -11,6 +11,10 @@ import java.io.InputStreamReader;
 public class DBCore {
 	private static String DB_PATH = "db/";
 
+	private interface RowReader {
+		public boolean doSomething(String row, boolean has_next);
+	}
+	
 	private static boolean createFileIfNotExists(String filename) {
 		boolean ret = true;
 		File file = new File(DB_PATH+filename);
@@ -25,6 +29,35 @@ public class DBCore {
 		return ret;
 	}
 	
+	private static String readFile(String filename, RowReader row_reader) {
+		if(!createFileIfNotExists(filename)) {
+			return "";
+		}
+		String line = "";
+		try {
+			FileInputStream fis = new FileInputStream(filename);
+			BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+			
+			line = br.readLine();
+			while(line != null) {
+				String next = br.readLine();
+				if(!row_reader.doSomething(line, next != null)) {
+					break;
+				}
+				line = next;
+			}
+			br.close();
+			fis.close();
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return line == null ? "" : line;
+	}
+	
 	public static void appendToFile(String filename, String row) {
 		if(!createFileIfNotExists(filename)) {
 			return;
@@ -37,34 +70,30 @@ public class DBCore {
 			e.printStackTrace();
 		}
 	}
-	public static String getRowByCol(String filename, int column, String value) {
-		if(!createFileIfNotExists(filename)) {
-			return "";
-		}
-		String row = "";
-		
-		try {
-			FileInputStream fis = new FileInputStream(filename);
-			BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-			
-			String line = br.readLine();
-			while(line != null) {
-				line = br.readLine();
-				String[] vals = line.split(",");
+	public static String getRowByCol(String filename, final int column, final String value) {
+		String row = readFile(filename, new RowReader() {
+			@Override
+			public boolean doSomething(String row, boolean has_next) {
+				boolean keep = true;
+				String[] vals = row.split(",");
 				if(vals[column].equals(value)) {
-					row = line;
-					break;
+					keep = false;
 				}
+				return keep;
 			}
-			br.close();
-			fis.close();
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		});
 		
 		return row;
+	}
+	public static String getLastRow(String filename) {
+		return readFile(filename, new RowReader() {			
+			@Override
+			public boolean doSomething(String row, boolean has_next) {
+				if(!has_next) {
+					return false;
+				}
+				return true;
+			}
+		});
 	}
 }
