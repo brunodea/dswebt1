@@ -12,36 +12,36 @@ import br.ufsm.dsweb.util.Util;
 @Named
 @SessionScoped
 public class Tweet extends Model implements Serializable {
-	private User user;
-	private Date pubdate;
-	private String content;
+	private User mUser;
+	private Date mPubDate;
+	private String mContent;
 	
 	public Tweet() {
 		setType(ModelType.TWEET);
 	}
 	
 	public User getUser() {
-		return user;
+		return mUser;
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		this.mUser = user;
 	}
 
 	public Date getPubdate() {
-		return pubdate;
+		return mPubDate;
 	}
 
 	public void setPubdate(Date pubdate) {
-		this.pubdate = pubdate;
+		this.mPubDate = pubdate;
 	}
 
 	public String getContent() {
-		return content;
+		return mContent;
 	}
 
 	public void setContent(String content) {
-		this.content = content;
+		this.mContent = content;
 	}
 
 	@Override
