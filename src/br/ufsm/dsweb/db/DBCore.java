@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 public class DBCore {
 	private static String DB_PATH = "db/";
 
-	public static boolean createFileIfNotExists(String filename) {
+	private static boolean createFileIfNotExists(String filename) {
 		boolean ret = true;
 		File file = new File(DB_PATH+filename);
 		if(!file.exists()) {
