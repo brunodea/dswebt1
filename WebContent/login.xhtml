@@ -1,46 +1,61 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!-- saved from url=(0060)http://www.alistapart.com/d/prettyaccessibleforms/example_2/ -->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" media="screen" href="./css/screen.css"/>
 
     <title>Twitcher</title>
 </head>
-<body>
-<form action="#" class="cmxform">
-	<p>Please complete the form below. Mandatory fields marked <em>*</em></p>
-	<fieldset>
-		<legend>Sign in</legend>
-		<ol>
-			<li><label for="name">Login <em>*</em></label> <input id="name"/></li>
-			<li><label for="address1">Password <em>*</em></label> <input id="address1"/></li>
-        <ol>
-            <li><label for="golf"><input id="golf" type="checkbox"/> Remember me</label></li>
-            <li><input type="submit" value="Login in"/></li>
-        </ol>
-		</ol>
-	</fieldset>
-</form>
-  
-<form action="#" class="cmxform">
-  
-	<fieldset>
-		<legend>Sign up</legend>
-		<ol>
-			<li><label for="name">Login <em>*</em></label> <input id="name"></li>
-			<li><label for="address1">Password <em>*</em></label> <input id="address1"></li>
-            <li><label for="address1">email <em>*</em></label> <input id="address1"></li>
-
+<h:body>
+    <h:form class="cmxform">
         <fieldset>
-        <ol>
-            <li><label for="golf"><input id="golf" type="checkbox"> <a href="url">I agree with the terms and policies</a></label></li>
-            <li><input type="submit" value="Sign up"></li>
-        </ol>
+            <legend>Sign In</legend>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Username *"/>
+                <h:inputText value="#{user.username}"/>
+                
+                <h:outputLabel value="Password *"/>
+                <h:inputSecret value="#{user.password}"/>
+    
+                <h:commandButton value="Login" action="welcome"/>
+            </h:panelGrid>
+        </fieldset>
+    </h:form>
+    
+    <h:form class="cmxform">
         <fieldset>
-		</ol>
-	</fieldset>
-	
-</form>
-
-</body></html>
+            <legend>Sign Up</legend>
+            <h:panelGrid columns="3">
+                <h:outputLabel value="Full Name *"></h:outputLabel>
+                <h:inputText id="fullname" 
+                    value="#{user.fullname}"
+                    required="true">
+                    <f:validateLength minimum="5"/>
+                </h:inputText>
+                <h:message for="fullname" style="color: red" />
+                
+                <h:outputLabel value="Username *"></h:outputLabel>
+                <h:inputText id="username"
+                    required="true"
+                    value="#{user.username}">
+                    <f:validator validatorId="signUpValidator"/>
+                    <f:validateLength minimum="6"/>            
+                </h:inputText>
+                <h:message for="username" style="color: red" />
+                
+                <h:outputLabel value="Password *"></h:outputLabel>
+                <h:inputSecret id="password" 
+                    value="#{user.password}"
+                    required="true">
+                    <f:validateLength minimum="6"/>    
+                </h:inputSecret>            
+                <h:message for="password" style="color: red" />
+                
+                <h:commandButton value="Done" action="#{user.save()}"/>
+            </h:panelGrid>
+        </fieldset>
+    </h:form>
+</h:body>
+</html>
