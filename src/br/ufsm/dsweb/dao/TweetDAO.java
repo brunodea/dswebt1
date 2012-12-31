@@ -4,6 +4,6 @@ import br.ufsm.dsweb.model.Tweet;
 
 public class TweetDAO extends ModelDAO<Tweet> {
 	public TweetDAO() {
-		super(new Tweet());
+		super(new Tweet(), "tweets.csv");
 	}
 }

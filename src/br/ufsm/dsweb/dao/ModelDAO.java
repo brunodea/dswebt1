@@ -2,15 +2,14 @@ package br.ufsm.dsweb.dao;
 
 import br.ufsm.dsweb.db.DBCore;
 import br.ufsm.dsweb.model.Model;
-import br.ufsm.dsweb.util.ModelUtil;
 
 
 public abstract class ModelDAO<T extends Model> {
 	private T mSubModel;
 	private String mFilename;
-	public ModelDAO(T submodel) {
+	public ModelDAO(T submodel, String filename) {
 		mSubModel = submodel;
-		mFilename = ModelUtil.filenameFromModel(mSubModel);
+		mFilename = filename;
 	}
 
 	public T getByID(int model_id) {
@@ -34,5 +33,9 @@ public abstract class ModelDAO<T extends Model> {
 		}
 		
 		return last_id;
+	}
+	
+	public String getFilename() {
+		return mFilename;
 	}
 }

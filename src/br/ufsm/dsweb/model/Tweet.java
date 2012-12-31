@@ -49,7 +49,7 @@ public class Tweet extends Model implements Serializable {
 	public void fromCSV(String csv) {
 		String[] vals = csv.split(",");
 		setID(Integer.parseInt(vals[0]));
-		setUser((new UserDAO()).getByID(Integer.parseInt(vals[1])));
+		setUser(new UserDAO().getByID(Integer.parseInt(vals[1])));
 		setPubdate(Util.stringToDate(vals[2]));
 		setContent(vals[3]);
 	}

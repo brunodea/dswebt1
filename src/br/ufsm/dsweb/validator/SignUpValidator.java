@@ -9,7 +9,7 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 
-import br.ufsm.dsweb.util.DBUtil;
+import br.ufsm.dsweb.dao.UserDAO;
 
 @Named("signUpValidator")
 @FacesValidator("signUpValidator")
@@ -20,7 +20,7 @@ public class SignUpValidator implements Validator {
 	public void validate(FacesContext context, UIComponent toValidate, Object value)
 			throws ValidatorException {
 		String username = (String)value;
-		if(DBUtil.usernameExists(username)) {
+		if(new UserDAO().usernameExists(username)) {
 			FacesMessage message = new FacesMessage();
 			message.setDetail("Username already taken.");
 			message.setSummary("Invalid username.");

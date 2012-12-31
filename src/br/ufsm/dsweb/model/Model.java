@@ -5,8 +5,6 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import br.ufsm.dsweb.util.ModelUtil;
-
 @Named("model")
 @SessionScoped
 public abstract class Model implements Serializable {
