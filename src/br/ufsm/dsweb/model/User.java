@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import br.ufsm.dsweb.db.DBActions;
+import br.ufsm.dsweb.util.ModelUtil;
 
 @Named
 @SessionScoped
@@ -13,10 +13,6 @@ public class User extends Model implements Serializable {
 	private String mFullName;
 	private String mUsername;
 	private String mPassword;
-	
-	public User() {
-		setType(ModelType.USER);
-	}
 	
 	public String getFullname() {
 		return mFullName;

@@ -6,7 +6,7 @@ import java.util.Date;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import br.ufsm.dsweb.db.DBActions;
+import br.ufsm.dsweb.dao.UserDAO;
 import br.ufsm.dsweb.util.Util;
 
 @Named
@@ -15,11 +15,7 @@ public class Tweet extends Model implements Serializable {
 	private User mUser;
 	private Date mPubDate;
 	private String mContent;
-	
-	public Tweet() {
-		setType(ModelType.TWEET);
-	}
-	
+		
 	public User getUser() {
 		return mUser;
 	}
@@ -53,7 +49,7 @@ public class Tweet extends Model implements Serializable {
 	public void fromCSV(String csv) {
 		String[] vals = csv.split(",");
 		setID(Integer.parseInt(vals[0]));
-		setUser(DBActions.getUserByID(Integer.parseInt(vals[1])));
+		setUser((new UserDAO()).getByID(Integer.parseInt(vals[1])));
 		setPubdate(Util.stringToDate(vals[2]));
 		setContent(vals[3]);
 	}
