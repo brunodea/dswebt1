@@ -1,9 +1,13 @@
 package br.ufsm.dsweb.dao;
 
+import javax.faces.bean.RequestScoped;
+import javax.inject.Named;
+
 import br.ufsm.dsweb.db.DBCore;
 import br.ufsm.dsweb.model.Model;
 
-
+@Named("modelDAO")
+@RequestScoped
 public abstract class ModelDAO<T extends Model> {
 	private T mSubModel;
 	private String mFilename;
