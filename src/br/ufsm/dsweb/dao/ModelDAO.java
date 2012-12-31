@@ -13,11 +13,13 @@ public abstract class ModelDAO<T extends Model> {
 	}
 
 	public T getByID(int model_id) {
+		T res = null;
 		String csv = DBCore.getRowByCol(mFilename, 0, String.valueOf(model_id));
 		if(!csv.equals("")) {
 			mSubModel.fromCSV(csv);
+			res = mSubModel;
 		}
-		return mSubModel;
+		return res;
 	}
 	public void save() {
 		mSubModel.setID(getLastID()+1);
