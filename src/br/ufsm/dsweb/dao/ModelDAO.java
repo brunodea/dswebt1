@@ -21,9 +21,9 @@ public abstract class ModelDAO<T extends Model> {
 		}
 		return res;
 	}
-	public void save() {
-		mSubModel.setID(getLastID()+1);
-		DBCore.appendToFile(mFilename, mSubModel.toCSV());
+	public void save(T submodel) {
+		submodel.setID(getLastID()+1);
+		DBCore.appendToFile(mFilename, submodel.toCSV());
 	}
 	
 	public String getFilename() {
