@@ -25,7 +25,12 @@ public abstract class ModelDAO<T extends Model> {
 		mSubModel.setID(getLastID()+1);
 		DBCore.appendToFile(mFilename, mSubModel.toCSV());
 	}
-	public int getLastID() {
+	
+	public String getFilename() {
+		return mFilename;
+	}
+
+	private int getLastID() {
 		int last_id = -1;
 		
 		String last_row = DBCore.getLastRow(mFilename);
@@ -35,9 +40,5 @@ public abstract class ModelDAO<T extends Model> {
 		}
 		
 		return last_id;
-	}
-	
-	public String getFilename() {
-		return mFilename;
 	}
 }
