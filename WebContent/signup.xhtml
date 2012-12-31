@@ -35,7 +35,7 @@
             </h:inputSecret>            
             <h:message for="password" style="color: red" />
             
-            <h:commandButton value="Done" action="#{user.save()}"/>
+            <h:commandButton value="Done" action="#{userDAO.save(user)}"/>
         </h:panelGrid>
     </h:form>
 </f:view>
