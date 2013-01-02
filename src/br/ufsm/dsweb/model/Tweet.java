@@ -3,14 +3,14 @@ package br.ufsm.dsweb.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 
 import br.ufsm.dsweb.dao.UserDAO;
 import br.ufsm.dsweb.util.Util;
 
-@Named
-@SessionScoped
+@Named("tweet")
+@RequestScoped
 public class Tweet extends Model implements Serializable {
 	private User mUser;
 	private Date mPubDate;

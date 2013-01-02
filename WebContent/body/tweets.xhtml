@@ -5,6 +5,7 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui">
     
-    
-    
+    <ui:repeat var="twt" value="#{userDAO.getAllTweets(user)}">
+        <ui:include src="./singletweet.xhtml"/>
+    </ui:repeat>
 </ui:composition>

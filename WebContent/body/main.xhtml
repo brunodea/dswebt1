@@ -4,29 +4,23 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-	<h:head>
-		<meta charset="utf-8" />
-		<link rel="stylesheet" href="css/reset.css"/>
-		<link rel="stylesheet" href="css/text.css"/>
-		<link rel="stylesheet" href="css/960.css"/>
-		<link rel="stylesheet" href="css/demo.css"/>
-		<link rel="stylesheet" href="css/topo.css"/>
-		
-	    <title>Twitcher!</title>
-	</h:head>
+<h:head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="css/reset.css"/>
+	<link rel="stylesheet" href="css/text.css"/>
+	<link rel="stylesheet" href="css/960.css"/>
+	<link rel="stylesheet" href="css/demo.css"/>
+	<link rel="stylesheet" href="css/topo.css"/>
+	
+    <title>Twitcher!</title>
+</h:head>
 <body>
-    <p:layout fullPage="True"/>
-        <p:layoutUnit position="north">
-	       <ui:include src="./topmenu.xhtml"/>
-        </p:layoutUnit>
+    <div class="container_12" style="margin: 0 auto;">
+        <ui:include src="./topmenu.xhtml"/>
+        
+	    <ui:insert name="center_content">stuff stuff</ui:insert>
 
-        <p:layoutUnit position="center">
-	       <ui:insert name="center_content">stuff stuff</ui:insert>
-        </p:layoutUnit>
-
-        <p:layoutUnit position="south">
-	       <ui:include src="./footer.xhtml"/>
-	    </p:layoutUnit>
-    </p:layout>
+        <ui:include src="./footer.xhtml"/>
+    </div>
 </body>
 </html>

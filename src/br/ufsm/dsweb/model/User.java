@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-@Named
+@Named("user")
 @SessionScoped
 public class User extends Model implements Serializable {
 	private String mFullName;
