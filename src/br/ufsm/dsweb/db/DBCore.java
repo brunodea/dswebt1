@@ -15,22 +15,33 @@ public class DBCore {
 		public boolean doSomething(String row, boolean has_next);
 	}
 	
-	private static boolean createFileIfNotExists(String filename) {
-		boolean ret = true;
+	private static synchronized File createFileIfNotExists(String filename) {
 		File file = new File(DB_PATH+filename);
 		if(!file.exists()) {
 			try {
 				file.createNewFile();
 			} catch (IOException e) {
 				e.printStackTrace();
-				ret = false;
+				file = null;
 			}
 		}
-		return ret;
+		return file;
+	}
+	private static synchronized void deleteFileIfExists(String filename) {
+		File file = new File(DB_PATH+filename);
+		if(file.exists()) {
+			file.delete();
+		}
+	}
+	private static synchronized void renameFile(String filename, File new_file) {
+		File file = new File(DB_PATH+filename);
+		if(file.exists()) {
+			file.renameTo(new_file);
+		}
 	}
 	
-	private static String readFile(String filename, RowReader row_reader) {
-		if(!createFileIfNotExists(filename)) {
+	private static synchronized String readFile(String filename, RowReader row_reader) {
+		if(createFileIfNotExists(filename) == null) {
 			return "";
 		}
 		String line = "";
@@ -58,8 +69,8 @@ public class DBCore {
 		return line == null ? "" : line;
 	}
 	
-	public static void appendToFile(String filename, String row) {
-		if(!createFileIfNotExists(filename)) {
+	public static synchronized void appendToFile(String filename, String row) {
+		if(createFileIfNotExists(filename) == null) {
 			return;
 		}
 		try {
@@ -70,6 +81,23 @@ public class DBCore {
 			e.printStackTrace();
 		}
 	}
+	public static synchronized void removeRowByCol(String filename, final int column, final String value) {
+		final String aux_filename = "aux_"+filename;
+		File f = createFileIfNotExists(aux_filename);
+		readFile(filename, new RowReader() {
+			@Override
+			public boolean doSomething(String row, boolean has_next) {
+				String[] vals = row.split(",");
+				if(!vals[column].equals(value)) {
+					appendToFile(aux_filename, row);
+				}
+				return true;
+			}
+		});
+		renameFile(filename, f);
+		deleteFileIfExists(aux_filename);
+	}
+
 	public static String getRowByCol(String filename, final int column, final String value) {
 		String row = readFile(filename, new RowReader() {
 			@Override

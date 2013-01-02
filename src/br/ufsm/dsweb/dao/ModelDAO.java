@@ -29,6 +29,9 @@ public abstract class ModelDAO<T extends Model> {
 		submodel.setID(getLastID()+1);
 		DBCore.appendToFile(mFilename, submodel.toCSV());
 	}
+	public void removeByID(int model_id) {
+		DBCore.removeRowByCol(mFilename, 0, model_id+"");
+	}
 	
 	public String getFilename() {
 		return mFilename;
