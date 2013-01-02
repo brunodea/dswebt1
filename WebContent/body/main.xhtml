@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/reset.css"/>
+		<link rel="stylesheet" href="css/text.css"/>
+		<link rel="stylesheet" href="css/960.css"/>
+		<link rel="stylesheet" href="css/demo.css"/>
+		<link rel="stylesheet" href="css/topo.css"/>
+		
+	    <title>Twitcher!</title>
+	</h:head>
+<body>
+    <p:layout fullPage="True"/>
+        <p:layoutUnit position="north">
+	       <ui:include src="./topmenu.xhtml"/>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+	       <ui:insert name="center_content">stuff stuff</ui:insert>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="south">
+	       <ui:include src="./footer.xhtml"/>
+	    </p:layoutUnit>
+    </p:layout>
+</body>
+</html>
