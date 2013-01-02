@@ -27,18 +27,6 @@ public class DBCore {
 		}
 		return file;
 	}
-	private static synchronized void deleteFileIfExists(String filename) {
-		File file = new File(DB_PATH+filename);
-		if(file.exists()) {
-			file.delete();
-		}
-	}
-	private static synchronized void renameFile(String filename, File new_file) {
-		File file = new File(DB_PATH+filename);
-		if(file.exists()) {
-			file.renameTo(new_file);
-		}
-	}
 	
 	private static synchronized String readFile(String filename, RowReader row_reader) {
 		if(createFileIfNotExists(filename) == null) {
@@ -83,7 +71,7 @@ public class DBCore {
 	}
 	public static synchronized void removeRowByCol(String filename, final int column, final String value) {
 		final String aux_filename = "aux_"+filename;
-		File f = createFileIfNotExists(aux_filename);
+		File new_file = createFileIfNotExists(aux_filename);
 		readFile(filename, new RowReader() {
 			@Override
 			public boolean doSomething(String row, boolean has_next) {
@@ -94,8 +82,8 @@ public class DBCore {
 				return true;
 			}
 		});
-		renameFile(filename, f);
-		deleteFileIfExists(aux_filename);
+		File old_file = createFileIfNotExists(filename);
+		new_file.renameTo(old_file);
 	}
 
 	public static String getRowByCol(String filename, final int column, final String value) {
