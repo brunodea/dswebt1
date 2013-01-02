@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class DBCore {
 	private static String DB_PATH = "";
@@ -101,6 +102,25 @@ public class DBCore {
 		
 		return row;
 	}
+	
+	public static ArrayList<String> getAllRowsByCol(String filename, final int column, final String value) {
+		final ArrayList<String> res = new ArrayList<String>();
+		
+		readFile(filename, new RowReader() {
+			@Override
+			public boolean doSomething(String row, boolean has_next) {
+				String []values = row.split(",");
+				if(values[column].equals(value)) {
+					res.add(row);
+				}
+				
+				return true;
+			}
+		});
+		
+		return res;
+	}
+	
 	public static String getLastRow(String filename) {
 		return readFile(filename, new RowReader() {			
 			@Override
