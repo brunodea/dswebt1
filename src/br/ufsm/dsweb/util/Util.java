@@ -6,12 +6,12 @@ import java.util.Date;
 
 public class Util {
 	public static String dateToString(Date date) {
-		return SimpleDateFormat.getDateTimeInstance().format(date);
+		return new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(date);
 	}
 	public static Date stringToDate(String date) {
 		Date d = null;
 		try {
-			d = SimpleDateFormat.getDateTimeInstance().parse(date);
+			d = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").parse(date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
