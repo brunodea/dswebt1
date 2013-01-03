@@ -27,11 +27,11 @@ public class UserController implements Serializable {
 		FacesMessage message = null;
 		if(udao.usernameExists(mUser.getUsername())) {
 			message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalida username", "Username already taken.");
+			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
-			message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success!", "You've been signed up with success.");
 			udao.save(mUser);
+			login();
 		}
-		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 	
 	public void login() {
