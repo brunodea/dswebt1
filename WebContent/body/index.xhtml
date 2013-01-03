@@ -16,7 +16,7 @@
 			        <p:row>
 	                    <p:column><h:outputLabel for="username" value="Username"/></p:column>
 						<p:column>
-						  <p:inputText id="username" value="#{user.username}" required="true">
+						  <p:inputText id="username" value="#{userController.user.username}" required="true">
 						      <f:validateLength minimum="6"/>
 						  </p:inputText>
 						</p:column>
@@ -24,7 +24,7 @@
 					<p:row>
 						<p:column><h:outputLabel for="password" value="Password"/></p:column>
 						<p:column>
-						  <p:password id="password" value="#{user.password}" required="true">
+						  <p:password id="password" value="#{userController.user.password}" required="true">
                               <f:validateLength minimum="6"/>
 						  </p:password>
 						</p:column>
