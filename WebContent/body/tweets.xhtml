@@ -4,8 +4,21 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui">
-    
-    <ui:repeat var="twt" value="#{userDAO.getAllTweets(user)}">
-        <ui:include src="./singletweet.xhtml"/>
-    </ui:repeat>
+    <p:panelGrid>
+	    <ui:repeat var="twt" value="#{userController.getAllTweets()}">
+		    <p:row>
+		        <p:column>
+		          <h:outputText value="#{twt.user.username}"/>
+		        </p:column>
+		        <p:column>
+		          <h:outputText value="#{twt.pubdate}"/>
+		        </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+		          <h:outputText value="#{twt.content}"/>
+		        </p:column>
+            </p:row>
+	    </ui:repeat>
+    </p:panelGrid>
 </ui:composition>
