@@ -6,21 +6,23 @@
     xmlns:p="http://primefaces.org/ui">
     
     <h:form>
-        <p:panelGrid id="tweet_grid" align="center">
-            <p:row>
-                <p:column>
-	            <p:inputTextarea rows="5" cols="60" counter="counter" maxlength="142"       
-	                counterTemplate="{0} characters remaining." autoResize="true"
-	                value="#{tweetController.tweet.content}"  required="true"/>
-                </p:column>
-                <p:column>
-                    <p:commandButton id="tweetButton" value="Tweet!" update="tweet_grid" 
-                       action="#{tweetController.doTweet(userController.user)}"/>
-                </p:column>
-	        </p:row>
-	        <p:row>
-	           <p:column colspan="2"><h:outputText id="counter"/></p:column>
-            </p:row>
-        </p:panelGrid>  
+        <p:panel header="Tweet">
+	        <p:panelGrid id="tweet_grid" align="center" styleClass="panelgrid_borderless">
+	            <p:row>
+	                <p:column>
+		            <p:inputTextarea rows="5" cols="60" counter="counter" maxlength="142"       
+		                counterTemplate="{0} characters remaining." autoResize="true"
+		                value="#{tweetController.tweet.content}"  required="true"/>
+	                </p:column>
+	                <p:column>
+	                    <p:commandButton id="tweetButton" value="Tweet!" update="tweet_grid" 
+	                       action="#{tweetController.doTweet(userController.user)}"/>
+	                </p:column>
+		        </p:row>
+		        <p:row>
+		           <p:column colspan="2"><h:outputText id="counter"/></p:column>
+	            </p:row>
+	        </p:panelGrid>
+        </p:panel>
     </h:form>
 </ui:composition>
