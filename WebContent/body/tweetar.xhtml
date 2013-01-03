@@ -1,0 +1,26 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <h:form>
+        <p:panelGrid id="tweet_grid" align="center">
+            <p:row>
+                <p:column>
+	            <p:inputTextarea rows="5" cols="60" counter="counter" maxlength="142"       
+	                counterTemplate="{0} characters remaining." autoResize="true"
+	                value="#{tweetController.tweet.content}"  required="true"/>
+                </p:column>
+                <p:column>
+                    <p:commandButton id="tweetButton" value="Tweet!" update="tweet_grid" 
+                       action="#{tweetController.doTweet(userController.user)}"/>
+                </p:column>
+	        </p:row>
+	        <p:row>
+	           <p:column colspan="2"><h:outputText id="counter"/></p:column>
+            </p:row>
+        </p:panelGrid>  
+    </h:form>
+</ui:composition>
