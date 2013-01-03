@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import br.ufsm.dsweb.dao.UserDAO;
@@ -14,7 +14,7 @@ import br.ufsm.dsweb.model.Tweet;
 import br.ufsm.dsweb.model.User;
 
 @ManagedBean(name="userController")
-@ViewScoped
+@SessionScoped
 public class UserController implements Serializable {
 	private User mUser;
 	
