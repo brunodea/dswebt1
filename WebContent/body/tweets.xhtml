@@ -4,23 +4,31 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui">
-    <p:panel header="Tweets">
-	    <p:panelGrid align="center">
-		    <ui:repeat var="twt" value="#{userController.allTweets}">
-			    <p:row>
-			        <p:column>
-			          <h:outputText value="#{twt.user.username}"/>
-			        </p:column>
-			        <p:column>
-			          <h:outputText value="#{twt.pubdate}"/>
-			        </p:column>
-	            </p:row>
-	            <p:row>
-	                <p:column>
-			          <h:outputText value="#{twt.content}"/>
-			        </p:column>
-	            </p:row>
-		    </ui:repeat>
-	    </p:panelGrid>
-    </p:panel>
+
+    <p:dataList value="#{userController.timeline}" var="tweet" id="timeline"  
+        paginator="true" rows="5" effectSpeed="fast"  
+        paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
+        rowsPerPageTemplate="10,20,30" type="none">  
+  
+            <f:facet name="header">
+                Timeline
+            </f:facet>  
+  
+            <p:panelGrid align="center" styleClass="panelgrid_borderless">
+                <p:row>
+                    <p:column>
+                        <h:outputText value="#{tweet.user.username}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{tweet.pubdate}"/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column colspan="2">
+                        <h:outputText value="#{tweet.content}"/>
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+            <br />
+    </p:dataList>  
 </ui:composition>

@@ -3,6 +3,7 @@ package br.ufsm.dsweb.controller;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -54,7 +55,7 @@ public class UserController implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	
-	public ArrayList<Tweet> getAllTweets() {
+	public List<Tweet> getTimeline() {
 		return new UserDAO().getAllTweets(getUser());
 	}
 	
