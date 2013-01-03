@@ -43,7 +43,8 @@ p {
 }
 
 .container_12 {
-  background-image: url(../img/12_col.gif);
+  background-color:#00733C;
+  
 }
 
 .container_16 {
@@ -53,3 +54,58 @@ p {
 .container_24 {
   background-image: url(../img/24_col.gif);
 }
+
+.foto-nick {
+    position: relative;
+    display: block;
+    height:107px;
+    width: 80px;
+	
+	vertical-align: middle;
+	margin-left: auto;
+	margin-right: auto;
+	display:block; margin:5px auto;
+	
+	
+}
+.foto-nick cite {
+    background: #111;
+    filter:alpha(opacity=55);
+    opacity:.55;
+    color: #fff;
+    position: absolute;
+    bottom: 50;
+    left: 0;
+    width: 70px;
+	height: 16px;
+    padding: 5px;
+    border-top: 1px solid #000;
+	
+	text-align: center;
+}
+.tweet {
+	position:relative;
+	top:32px;
+	border: 1px solid #FFFFFF;
+	overflow: hidden;
+	padding: 5px 10px 10px 10px;
+	text-align: justify;
+	background-color: #61D89F;
+	height:40px;
+	font:italic bold 14px/20px serif;
+	vertical-align: middle;	
+}
+
+.coisas_esquerda {
+	position:relative;
+	top:5px;
+	bottom:50px;
+	border: 1px solid #FFFFFF;
+	overflow: hidden;
+	padding: 5px 10px 10px 10px;
+	text-align: justify;
+	background-color: #61D89F;
+	height:50px;
+	font:italic bold 14px/20px serif;
+	vertical-align: middle;	
+};
