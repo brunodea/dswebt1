@@ -1,58 +1,54 @@
 #topmenu { 
-height: 45px; 
-
-text-align:center;
-margin-left: auto;
-margin-right: auto;
-
-z-index: 95469148; 
-background: #F1F1F1; 
-
-width: 960px; 
-border-width: 1px 0; 
-border-style: solid; 
-border-color: #EBEBEB; 
-border-bottom: 3px solid gainsboro; 
--moz-box-shadow: 0px 6px 30px #c9c9c9; 
--webkit-box-shadow: 0px 6px 30px #c9c9c9; 
-box-shadow: 0px 6px 30px #c9c9c9; 
+	height: 45px; 
+	
+	text-align:center;
+	
+	z-index: 95469148; 
+	background: #F1F1F1; 
+	
+	width: 100%;
+	border-width: 1px 0; 
+	border-style: solid; 
+	border-color: #EBEBEB; 
+	border-bottom: 3px solid gainsboro; 
+	-moz-box-shadow: 0px 6px 30px #c9c9c9; 
+	-webkit-box-shadow: 0px 6px 30px #c9c9c9; 
+	box-shadow: 0px 6px 30px #c9c9c9; 
 }
 
 #topmenu ul { 
-padding-top: 1px; 
-color: #555; 
-margin-top: 8px; 
+	padding-top: 1px; 
+	color: #555; 
+	margin-top: 8px; 
 }
 
 .topmenuativo a:link { 
-color: #c60; 
+    color: #c60; 
 }
 
 #topmenu li { 
-list-style-type: none; 
-display: inline; 
-color: #555; 
-cursor: pointer; 
-line-height: 26px; 
-text-align: center; 
-font-size: 14px; 
-font-weight: bold; 
-
+	list-style-type: none; 
+	display: inline; 
+	color: #555; 
+	cursor: pointer; 
+	line-height: 26px; 
+	text-align: center; 
+	font-size: 14px; 
+	font-weight: bold; 
 }
 
 #topmenu li a { 
-color: #555; 
--webkit-transition: All 0.3s ease; 
--moz-transition: All 0.3s ease; 
--o-transition: All 0.3s ease; 
-text-decoration: none; 
-padding-left: 26px; 
+	color: #555; 
+	-webkit-transition: All 0.3s ease; 
+	-moz-transition: All 0.3s ease; 
+	-o-transition: All 0.3s ease; 
+	text-decoration: none;
 }
 
 #topmenu li a:hover { 
-color: #C60; 
--webkit-transform: rotate(0deg) scale(1.2) skew(1deg) translate(0px); 
--moz-transform: rotate(0deg) scale(1.2) skew(1deg) translate(0px); 
--o-transform: rotate(0deg) scale(1.2) skew(1deg) translate(0px); 
-text-decoration: none; 
+	color: #C60; 
+	-webkit-transform: rotate(0deg) scale(1.2) skew(1deg) translate(0px); 
+	-moz-transform: rotate(0deg) scale(1.2) skew(1deg) translate(0px); 
+	-o-transform: rotate(0deg) scale(1.2) skew(1deg) translate(0px); 
+	text-decoration: none; 
 } 
