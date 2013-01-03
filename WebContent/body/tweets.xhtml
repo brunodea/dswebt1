@@ -4,21 +4,23 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui">
-    <p:panelGrid align="center" style="background-color: #ababab;">
-	    <ui:repeat var="twt" value="#{userController.allTweets}">
-		    <p:row>
-		        <p:column>
-		          <h:outputText value="#{twt.user.username}"/>
-		        </p:column>
-		        <p:column>
-		          <h:outputText value="#{twt.pubdate}"/>
-		        </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-		          <h:outputText value="#{twt.content}"/>
-		        </p:column>
-            </p:row>
-	    </ui:repeat>
-    </p:panelGrid>
+    <p:panel header="Tweets">
+	    <p:panelGrid align="center">
+		    <ui:repeat var="twt" value="#{userController.allTweets}">
+			    <p:row>
+			        <p:column>
+			          <h:outputText value="#{twt.user.username}"/>
+			        </p:column>
+			        <p:column>
+			          <h:outputText value="#{twt.pubdate}"/>
+			        </p:column>
+	            </p:row>
+	            <p:row>
+	                <p:column>
+			          <h:outputText value="#{twt.content}"/>
+			        </p:column>
+	            </p:row>
+		    </ui:repeat>
+	    </p:panelGrid>
+    </p:panel>
 </ui:composition>
