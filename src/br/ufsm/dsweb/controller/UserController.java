@@ -42,7 +42,7 @@ public class UserController implements Serializable {
 			mUser.fromCSV(u.toCSV());
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", mUser);
 			try {
-				FacesContext.getCurrentInstance().getExternalContext().redirect("main.xhtml");
+				FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
 				return;
 			} catch (IOException e) {
 				e.printStackTrace();
