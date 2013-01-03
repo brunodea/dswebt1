@@ -1,0 +1,5 @@
+@CHARSET "UTF-8";
+
+.panelgrid_borderless tr, .panelgrid_borderless td {
+	border: none;
+}
