@@ -2,15 +2,10 @@ package br.ufsm.dsweb.dao;
 
 import java.util.ArrayList;
 
-import javax.faces.bean.RequestScoped;
-import javax.inject.Named;
-
 import br.ufsm.dsweb.db.DBCore;
 import br.ufsm.dsweb.model.Tweet;
 import br.ufsm.dsweb.model.User;
 
-@Named("userDAO")
-@RequestScoped
 public class UserDAO extends ModelDAO<User> {
 	public UserDAO() {
 		super(new User(), "users.csv");

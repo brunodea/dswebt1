@@ -2,11 +2,6 @@ package br.ufsm.dsweb.model;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
-
-@Named("model")
-@SessionScoped
 public abstract class Model implements Serializable {
 	private int mId;
 

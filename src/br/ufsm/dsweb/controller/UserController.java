@@ -2,6 +2,7 @@ package br.ufsm.dsweb.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -9,18 +10,25 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.ufsm.dsweb.dao.UserDAO;
+import br.ufsm.dsweb.model.Tweet;
 import br.ufsm.dsweb.model.User;
 
 @ManagedBean(name="userController")
 @ViewScoped
-public class UserController implements Serializable {	
-	public void login(User user) {
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Logado com sucesso!", "Bem vindo!");
+public class UserController implements Serializable {
+	private User mUser;
+	
+	public UserController() {
+		mUser = new User();
+	}
+	
+	public void login() {
+		FacesMessage msg = null;
 		
-		User u = new UserDAO().login(user.getUsername(), user.getPassword());
+		User u = new UserDAO().login(mUser.getUsername(), mUser.getPassword());
 		if(u != null) {
-			user.fromCSV(u.toCSV());
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
+			mUser.fromCSV(u.toCSV());
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", mUser);
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("main.xhtml");
 				return;
@@ -32,5 +40,16 @@ public class UserController implements Serializable {
 		}
 
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+	
+	public ArrayList<Tweet> getAllTweets() {
+		return new UserDAO().getAllTweets(getUser());
+	}
+	
+	public User getUser() {
+		return mUser;
+	}
+	public void setUser(User user) {
+		mUser = user;
 	}
 }
