@@ -56,6 +56,16 @@ public class UserController implements Serializable {
 
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
+	public void logout() {
+		if(isLogged()) {
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("user");
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	public List<Tweet> getTimeline() {
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
