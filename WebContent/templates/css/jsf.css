@@ -39,6 +39,11 @@ TABLE.panelGridClass {
     width: 400px;
 }
 
+.mensagem_box{
+    position: relative;
+    top: 7px;
+}
+
 .painel {
    border-width: 3px;
    border-color: gray;
