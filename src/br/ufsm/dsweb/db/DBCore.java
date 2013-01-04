@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DBCore {
 	private static final String DB_PATH = "";
@@ -72,13 +73,25 @@ public class DBCore {
 		}
 	}
 	public static synchronized void removeRowByCol(String filename, final int column, final String value) {
+		HashMap<Integer, String> col_vals = new HashMap<Integer, String>();
+		col_vals.put(column, value);
+		removeRowByCols(filename, col_vals);
+	}
+	public static synchronized void removeRowByCols(String filename, final HashMap<Integer, String> col_vals) {
 		final String aux_filename = "aux_"+filename;
 		File new_file = createFileIfNotExists(aux_filename);
 		readFile(filename, new RowReader() {
 			@Override
 			public boolean doSomething(String row, boolean has_next) {
 				String[] vals = row.split(SEPARATOR);
-				if(!vals[column].equals(value)) {
+				boolean found = true;
+				for(Integer col : col_vals.keySet()) {
+					if(!vals[col].equals(col_vals.get(col))) {
+						found = false;
+						break;
+					}
+				}
+				if(!found) {
 					appendToFile(aux_filename, row);
 				}
 				return true;
@@ -88,32 +101,55 @@ public class DBCore {
 		new_file.renameTo(old_file);
 	}
 
-	public static String getRowByCol(String filename, final int column, final String value) {
+	public static synchronized String getRowByCol(String filename, final int column, final String value) {
+		HashMap<Integer, String> col_vals = new HashMap<Integer, String>();
+		col_vals.put(column, value);
+		
+		return getRowByCols(filename, col_vals);
+	}
+	public static synchronized String getRowByCols(String filename, final HashMap<Integer, String> col_vals) {
 		String row = readFile(filename, new RowReader() {
 			@Override
 			public boolean doSomething(String row, boolean has_next) {
-				boolean keep = true;
 				String[] vals = row.split(SEPARATOR);
-				if(vals[column].equals(value)) {
-					keep = false;
+				boolean found = true;
+				for(Integer col : col_vals.keySet()) {
+					if(!vals[col].equals(col_vals.get(col))) {
+						found = false;
+						break;
+					}
 				}
-				return keep;
+				return !found;
 			}
 		});
 		
 		return row;
 	}
 	
-	public static ArrayList<String> getAllRowsByCol(String filename, final int column, final String value) {
-		final ArrayList<String> res = new ArrayList<String>();
+	public static synchronized ArrayList<String> getAllRowsByCol(String filename, final int column, final String value) {
+		HashMap<Integer, String> col_vals = new HashMap<Integer, String>();
+		col_vals.put(column, value);
 		
+		return getAllRowsByCols(filename, col_vals);
+	}
+	public static synchronized ArrayList<String> getAllRowsByCols(String filename, final HashMap<Integer, String> col_vals) {
+		final ArrayList<String> res = new ArrayList<String>();
+
 		readFile(filename, new RowReader() {
 			@Override
 			public boolean doSomething(String row, boolean has_next) {
-				String []values = row.split(SEPARATOR);
-				if(values[column].equals(value)) {
+				String[] vals = row.split(SEPARATOR);
+				boolean found = true;
+				for(Integer col : col_vals.keySet()) {
+					if(!vals[col].equals(col_vals.get(col))) {
+						found = false;
+						break;
+					}
+				}
+				if(found) {
 					res.add(row);
 				}
+				
 				return true;
 			}
 		});
@@ -121,7 +157,7 @@ public class DBCore {
 		return res;
 	}
 	
-	public static String getLastRow(String filename) {
+	public static synchronized String getLastRow(String filename) {
 		return readFile(filename, new RowReader() {			
 			@Override
 			public boolean doSomething(String row, boolean has_next) {

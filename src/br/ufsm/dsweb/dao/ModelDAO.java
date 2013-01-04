@@ -1,5 +1,7 @@
 package br.ufsm.dsweb.dao;
 
+import java.util.HashMap;
+
 import br.ufsm.dsweb.db.DBCore;
 import br.ufsm.dsweb.model.Model;
 
@@ -27,6 +29,9 @@ public abstract class ModelDAO<T extends Model> {
 	}
 	public void removeByID(int model_id) {
 		DBCore.removeRowByCol(mFilename, 0, model_id+"");
+	}
+	public void removeByCols(HashMap<Integer,String> col_vals) {
+		DBCore.removeRowByCols(mFilename, col_vals);
 	}
 	
 	public String getFilename() {
