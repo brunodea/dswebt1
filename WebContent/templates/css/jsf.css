@@ -1,0 +1,43 @@
+
+TABLE.panelGridClass {
+    width: 500px;
+   background-color: #61D89F;
+}
+
+.rotulo_login_signup{
+
+    /*Especifica preta a cor da fonte do elemento */
+
+    color: #000000;
+    margin:3px 3px 3px 0px;
+    font-size: 14px;
+    font-family: serif;
+    font-weight: bold;
+}
+
+.caixa_login {
+    position: relative;
+    top: 30px;
+    width: 300px;
+}
+
+.caixa_signup {
+    position: relative;
+    top: 15px;
+    width: 300px;
+}
+
+.painel {
+   border-width: 3px;
+   border-color: gray;
+}
+
+.bruno {
+    text-align: center;
+    width: 300px;
+}
+
+.grid_login {
+     position: relative;
+     bottom: 0px;
+}

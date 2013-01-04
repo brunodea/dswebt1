@@ -11,57 +11,57 @@
         </div>
         <div class="clear"/>
         <div class="grid_4 prefix_1 suffix_1">
-	    <h:form>
-            <p:panel id="login_panel" header="Login">
-	            <p:panelGrid id="login_grid" align="center" styleClass="panelgrid_borderless">
-			        <p:row>
-	                    <p:column><h:outputLabel for="username" value="Username"/></p:column>
-						<p:column>
-						  <p:inputText id="username" value="#{userController.currentUser.username}" required="true">
-						      <f:validateLength minimum="6"/>
-						  </p:inputText>
-						</p:column>
-					</p:row>
-					<p:row>
-						<p:column><h:outputLabel for="password" value="Password"/></p:column>
-						<p:column>
-						  <p:password id="password" value="#{userController.currentUser.password}" required="true">
-                              <f:validateLength minimum="6"/>
-						  </p:password>
-						</p:column>
-					</p:row>
-					<p:row>
-					    <p:column colspan="2">
-	                        <p:commandButton id="loginButton" value="Login" update="login_panel" 
-	                           action="#{userController.login()}"/>
-	                    </p:column>
-					</p:row>
-	            </p:panelGrid>
-            </p:panel>
+	    <h:form styleClass="caixa_login">
+                <p:panel id="login_panel" header="Login" styleClass="painel">
+                        <p:panelGrid id="login_grid" align="center" styleClass="panelgrid_borderless">
+                              <p:row>
+                                <p:column><h:outputLabel for="username" styleClass="rotulo_login_signup" value="Username"/></p:column>
+                                      <p:column>
+                                          <p:inputText id="username" value="#{userController.currentUser.username}" required="true">
+                                                <f:validateLength minimum="6"/>
+                                       </p:inputText>
+                                </p:column>
+                              </p:row>
+                              <p:row>
+                                 <p:column><h:outputLabel for="password" styleClass="rotulo_login_signup" value="Password"/></p:column>
+                                           <p:column>
+                                                      <p:password id="password" value="#{userController.currentUser.password}" required="true">
+                                  <f:validateLength minimum="6"/>
+                                                      </p:password>
+                                                    </p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="2">
+                                    <p:commandButton id="loginButton" value="Login" update="login_panel" 
+                                       action="#{userController.login()}"/>
+                                </p:column>
+                                            </p:row>
+                        </p:panelGrid>
+                </p:panel>
 	    </h:form>
         </div>
         <div class="grid_4 prefix_1 suffix_1">
-            <h:form enctype="multipart/form-data">
-	            <p:panel id="signup_panel" header="Sign Up">
-	                <p:panelGrid id="signup_grid" align="center" styleClass="panelgrid_borderless">
+            <h:form styleClass="caixa_signup">
+	            <p:panel id="signup_panel" header="Sign Up" styleClass="painel">
+	                <p:panelGrid id="signup_grid" styleClass="panelgrid_borderless" >
 	                    <p:row>
-	                        <p:column><h:outputLabel for="signup_fullname" value="Fullname"/></p:column>
+	                       <p:column ><h:outputLabel for="signup_fullname" styleClass="rotulo_login_signup" value="Fullname"/></p:column>
 	                        <p:column>
-	                            <p:inputText id="signup_fullname" value="#{userController.currentUser.fullname}" required="true">
+	                            <p:inputText id="signup_fullname"  value="#{userController.currentUser.fullname}" required="true">
 	                                <f:validateLength minimum="6"/>
 	                            </p:inputText>
 	                        </p:column>
 	                    </p:row>
 	                    <p:row>
-	                        <p:column><h:outputLabel for="signup_username" value="Username"/></p:column>
+	                        <p:column><h:outputLabel for="signup_username" styleClass="rotulo_login_signup" value="Username"/></p:column>
 	                        <p:column>
-	                            <p:inputText id="signup_username" value="#{userController.currentUser.username}" required="true">
+	                            <p:inputText id="signup_username" value="#{userController.currentUser.username}" required="true" >
 	                                <f:validateLength minimum="6"/>
 	                            </p:inputText>
 	                        </p:column>
 	                    </p:row>
 	                    <p:row>
-	                        <p:column><h:outputLabel for="signup_password" value="Password"/></p:column>
+	                        <p:column><h:outputLabel for="signup_password" styleClass="rotulo_login_signup"  value="Password"/></p:column>
 	                        <p:column>
 	                            <p:inputText id="signup_password" value="#{userController.currentUser.password}" required="true">
 	                                <f:validateLength minimum="6"/>
@@ -69,8 +69,8 @@
 	                        </p:column>
 	                    </p:row>
 	                    <p:row>
-	                        <p:column colspan="2">
-	                            <p:commandButton id="signupButton" value="Sign Up" update="signup_panel" 
+	                        <p:column>
+                                    <p:commandButton id="signupButton" value="Sign Up" update="signup_panel" 
 	                               action="#{userController.signup()}"/>
 	                        </p:column>
 	                    </p:row>
@@ -79,4 +79,4 @@
             </h:form>
         </div>
     </ui:define>
-</ui:composition> 
+</ui:composition>
