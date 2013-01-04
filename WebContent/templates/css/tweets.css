@@ -12,13 +12,13 @@
 
 .tweet_nick {
     position: relative;
-    top: 0px;
     left: 0px;
-    width: 40px;
-    font-size: 90%;
-    font-style: italic;
-    font-family: fantasy;   
     text-align: center;
+    width: 90px;
+    font-size: 110%;
+    font-family: cursive;   
+    text-align: center;
+    padding:1px;   
 }
 
 .tweet_text {
@@ -27,10 +27,9 @@
     width: 180px;
     word-break: break-all;
     font-family: monospace;
-    background: black;
     font-size: 100%;
     font-weight: bold;
-    
+    padding: 1px;
 }
 
 .tweet_date {
@@ -41,11 +40,14 @@
     font-size: 70%;
     font-style: italic;
     font-weight: bold;
+     padding: 1px;
+    border-bottom:  1px solid #021a40;
 }
 
 .tweet_box{
-    border: 5px;
-    border-color: black;
+    padding: 1px;
+    border-bottom:  1px dotted #021a40;
+    
 }
 
 .tweet_foto{
@@ -55,4 +57,7 @@
    border-color: black;
    top: 10px;
    alignment-adjust: middle;
+   padding:1px;
+   border:1px solid #021a40;
+   background-color:#F1F1F1;
 }
