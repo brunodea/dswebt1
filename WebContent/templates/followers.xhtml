@@ -1,0 +1,38 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:p="http://primefaces.org/ui">
+
+    <h:form>
+        <p:commandButton id="followButton" 
+            value="#{followsController.isFollowing(userController.loggedUser, userController.currentUser) ? 'Unfollow' : 'Follow'}" 
+            update="@all" 
+            rendered="#{!userController.currentUserIsLoggedUser}"
+            actionListener="#{followsController.toggleFollow(userController.loggedUser, userController.currentUser)}"/>
+    </h:form>
+	<p:carousel value="#{userController.currentUserFollowers}" var="usr" itemStyleClass="">  
+	    <f:facet name="header">
+	       <h:outputText value="Followers"/>
+	    </f:facet>  
+	    <p:panelGrid styleClass="panelgrid_borderless">
+	       <p:row>
+	           <p:column>
+	               <p:graphicImage value="#{usr.imagePath}"/>
+	           </p:column>
+	       </p:row>
+	       <p:row>
+	           <p:column>
+	               <a href="./profile.xhtml?username=#{usr.username}">
+	                   <h:outputText value="#{usr.username}"/>
+	               </a>
+	           </p:column>
+	       </p:row>
+	    </p:panelGrid>
+	    <f:facet name="footer">  
+            <h:outputText value="#{fn:length(userController.currentUserFollowers)} followers."/>
+	    </f:facet>  
+	</p:carousel>
+</ui:composition>

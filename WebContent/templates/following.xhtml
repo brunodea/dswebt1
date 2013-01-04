@@ -1,0 +1,31 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:p="http://primefaces.org/ui">
+
+    <p:carousel value="#{userController.currentUserFollowing}" var="usr" itemStyleClass="">  
+        <f:facet name="header">
+           <h:outputText value="Following"/>
+        </f:facet>  
+        <p:panelGrid styleClass="panelgrid_borderless">
+           <p:row>
+               <p:column>
+                   <p:graphicImage value="#{usr.imagePath}"/>
+               </p:column>
+           </p:row>
+           <p:row>
+               <p:column>
+                   <a href="./profile.xhtml?username=#{usr.username}">
+                       <h:outputText value="#{usr.username}"/>
+                   </a>
+               </p:column>
+           </p:row>
+        </p:panelGrid>
+        <f:facet name="footer">
+            <h:outputText value="Following #{fn:length(userController.currentUserFollowing)} users."/>
+        </f:facet>  
+    </p:carousel>
+</ui:composition>
