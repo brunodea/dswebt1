@@ -1,24 +1,82 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"> 
+<ui:composition template="./main.xhtml" 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"> 
 
-<h:head>
-	<link rel="stylesheet" type="text/css" media="all" href="../css/reset.css" />
-	<link rel="stylesheet" type="text/css" media="all" href="../css/text.css" />
-	<link rel="stylesheet" type="text/css" media="all" href="../css/960.css" />
-	
-	<title>Twitcher!</title>
-</h:head> 
-<body>
-    <p:layout fullPage="true">
-	    <div class="container_12">
-	        <div class="grid_4 prefix_4 suffix_4" align="center">
-                <ui:insert name="center_grid">Teste teste teste teste</ui:insert>
-	        </div>
-	    </div>
-    </p:layout>
-</body> 
-</html>
+    <ui:define name="center_content">
+        <div class="grid_6 prefix_3 suffix_3">
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="false"/>
+        </div>
+        <div class="clear"/>
+        <div class="grid_4 prefix_1 suffix_1">
+	    <h:form>
+            <p:panel id="login_panel" header="Login">
+	            <p:panelGrid id="login_grid" align="center" styleClass="panelgrid_borderless">
+			        <p:row>
+	                    <p:column><h:outputLabel for="username" value="Username"/></p:column>
+						<p:column>
+						  <p:inputText id="username" value="#{userController.user.username}" required="true">
+						      <f:validateLength minimum="6"/>
+						  </p:inputText>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column><h:outputLabel for="password" value="Password"/></p:column>
+						<p:column>
+						  <p:password id="password" value="#{userController.user.password}" required="true">
+                              <f:validateLength minimum="6"/>
+						  </p:password>
+						</p:column>
+					</p:row>
+					<p:row>
+					    <p:column colspan="2">
+	                        <p:commandButton id="loginButton" value="Login" update="login_panel" 
+	                           action="#{userController.login()}"/>
+	                    </p:column>
+					</p:row>
+	            </p:panelGrid>
+            </p:panel>
+	    </h:form>
+        </div>
+        <div class="grid_4 prefix_1 suffix_1">
+            <h:form>
+	            <p:panel id="signup_panel" header="Sign Up">
+	                <p:panelGrid id="signup_grid" align="center" styleClass="panelgrid_borderless">
+	                    <p:row>
+	                        <p:column><h:outputLabel for="signup_fullname" value="Fullname"/></p:column>
+	                        <p:column>
+	                            <p:inputText id="signup_fullname" value="#{userController.user.fullname}" required="true">
+	                                <f:validateLength minimum="6"/>
+	                            </p:inputText>
+	                        </p:column>
+	                    </p:row>
+	                    <p:row>
+	                        <p:column><h:outputLabel for="signup_username" value="Username"/></p:column>
+	                        <p:column>
+	                            <p:inputText id="signup_username" value="#{userController.user.username}" required="true">
+	                                <f:validateLength minimum="6"/>
+	                            </p:inputText>
+	                        </p:column>
+	                    </p:row>
+	                    <p:row>
+	                        <p:column><h:outputLabel for="signup_password" value="Password"/></p:column>
+	                        <p:column>
+	                            <p:inputText id="signup_password" value="#{userController.user.password}" required="true">
+	                                <f:validateLength minimum="6"/>
+	                            </p:inputText>
+	                        </p:column>
+	                    </p:row>
+	                    <p:row>
+	                        <p:column colspan="2">
+	                            <p:commandButton id="signupButton" value="Sign Up" update="signup_panel" 
+	                               action="#{userController.signup()}"/>
+	                        </p:column>
+	                    </p:row>
+	                </p:panelGrid>
+	            </p:panel>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition> 
