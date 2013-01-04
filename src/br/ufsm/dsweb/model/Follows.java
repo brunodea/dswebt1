@@ -34,8 +34,7 @@ public class Follows extends Model implements Serializable {
 	@Override
 	public void fromCSV(String csv) {
 		String[] vals = csv.split(DBCore.SEPARATOR);
-		UserDAO user_dao = new UserDAO();
-		setFollower(user_dao.getByID(Integer.parseInt(vals[0])));
-		setFollowed(user_dao.getByID(Integer.parseInt(vals[1])));
+		setFollower(new UserDAO().getByID(Integer.parseInt(vals[0])));
+		setFollowed(new UserDAO().getByID(Integer.parseInt(vals[1])));
 	}
 }
