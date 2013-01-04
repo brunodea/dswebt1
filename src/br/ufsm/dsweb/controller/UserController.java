@@ -99,4 +99,10 @@ public class UserController implements Serializable {
 	public boolean isLogged() {
 		return FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("user");
 	}
+	public List<User> getCurrentUserFollowers() {
+		return new FollowsDAO().getFollowers(getCurrentUser());
+	}
+	public List<User> getCurrentUserFollowing() {
+		return new FollowsDAO().getFollowing(getCurrentUser());
+	}
 }
