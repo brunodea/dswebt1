@@ -2,6 +2,9 @@ package br.ufsm.dsweb.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -9,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import br.ufsm.dsweb.dao.FollowsDAO;
 import br.ufsm.dsweb.dao.UserDAO;
 import br.ufsm.dsweb.model.Tweet;
 import br.ufsm.dsweb.model.User;
@@ -54,7 +58,18 @@ public class UserController implements Serializable {
 	}
 	
 	public List<Tweet> getTimeline() {
-		return new UserDAO().getAllTweets(getCurrentUser());
+		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
+		for(User user : getCurrentUserFollowing()) {
+			tweets.addAll(new UserDAO().getAllTweets(user));
+		}
+		tweets.addAll(new UserDAO().getAllTweets(getCurrentUser()));
+		Collections.sort(tweets, new Comparator<Tweet>() {
+			@Override
+			public int compare(Tweet lhs, Tweet rhs) {
+				return rhs.getPubdate().compareTo(lhs.getPubdate());
+			}
+		});
+		return tweets;
 	}
 	
 	public boolean getCurrentUserIsLoggedUser() {
