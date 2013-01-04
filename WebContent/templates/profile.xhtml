@@ -6,7 +6,7 @@
     xmlns:p="http://primefaces.org/ui">
     
     <f:metadata>
-        <f:viewParam name="username" value="#{userController.viewUsername}" />
+        <f:viewParam name="username" value="#{userController.dumbUser.username}" />
     </f:metadata>
     
     <ui:define name="center_content">
@@ -17,7 +17,7 @@
         <div class="grid_6" align="center" hidden="#{userController.currentUserIsLoggedUser}">
             <ui:include src="tweetar.xhtml"/>
         </div>
-        <div class="grid_6" align="center">
+        <div class="grid_6 #{userController.currentUserIsLoggedUser ? '' : 'prefix_3'}" align="center">
             <ui:include src="tweets.xhtml"/>
         </div>
         <div class="clear"/>

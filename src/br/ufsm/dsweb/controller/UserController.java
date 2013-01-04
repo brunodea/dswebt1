@@ -16,22 +16,20 @@ import br.ufsm.dsweb.model.User;
 @ManagedBean(name="userController")
 @SessionScoped
 public class UserController implements Serializable {
-	private User mLoggedUser; //usuário logado.
-	private String mViewUsername; //usuário sendo visualizado.
+	private User mDumbUser; //usuário que não está no BD.
 
 	public UserController() {
-		mLoggedUser = new User();
-		mViewUsername = null;
+		mDumbUser = new User();
 	}
 	
 	public void signup() {
 		UserDAO udao = new UserDAO();
 		FacesMessage message = null;
-		if(udao.usernameExists(mLoggedUser.getUsername())) {
+		if(udao.usernameExists(getDumbUser().getUsername())) {
 			message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalida username", "Username already taken.");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
-			udao.save(mLoggedUser);
+			udao.save(getDumbUser());
 			login();
 		}
 	}
@@ -39,12 +37,11 @@ public class UserController implements Serializable {
 	public void login() {
 		FacesMessage msg = null;
 		
-		User u = new UserDAO().login(mLoggedUser.getUsername(), mLoggedUser.getPassword());
+		User u = new UserDAO().login(getDumbUser().getUsername(), getDumbUser().getPassword());
 		if(u != null) {
-			mLoggedUser.fromCSV(u.toCSV());
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", mLoggedUser);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", u);
 			try {
-				FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml");
+				FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml?username="+u.getUsername());
 				return;
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -61,29 +58,30 @@ public class UserController implements Serializable {
 	}
 	
 	public boolean getCurrentUserIsLoggedUser() {
-		return mLoggedUser == getCurrentUser();
+		User curr = getCurrentUser();
+		User logged = getLoggedUser();
+		return curr != null && logged != null && curr.getID() == logged.getID();
 	}
+
 	public User getCurrentUser() {
 		User user = null;
-		if(mViewUsername != null) {
-			user = new UserDAO().getByUsername(mViewUsername);
-		}
-		if(user == null) {
-			user = mLoggedUser;
+		if(mDumbUser.getUsername() != null) {
+			user = new UserDAO().getByUsername(mDumbUser.getUsername());
 		}
 		return user;
 	}
-	public void setCurrentUser(User user) {
-		mLoggedUser = user;
-	}
 	public User getLoggedUser() {
-		return mLoggedUser;
+		User user = null;
+		if(isLogged()) {
+			user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+		}
+		return user;
+	}
+	public User getDumbUser() {
+		return mDumbUser;
 	}
 	
-	public String getViewUsername() {
-		return mViewUsername;
-	}
-	public void setViewUsername(String username) {
-		mViewUsername = username;
+	public boolean isLogged() {
+		return FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("user");
 	}
 }

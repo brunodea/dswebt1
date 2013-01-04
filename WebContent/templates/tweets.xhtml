@@ -8,13 +8,13 @@
     <p:dataList value="#{userController.timeline}" var="tweet" id="timeline"  
         paginator="true" rows="5" effectSpeed="fast"  
         paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
-        rowsPerPageTemplate="10,20,30" type="none">  
+        rowsPerPageTemplate="10,20,30" type="none" rendered="#{userController.currentUser != null}">  
   
             <f:facet name="header">
-                Timeline
+                <h:outputText value="Timeline de #{userController.currentUser.username}"/>
             </f:facet>  
   
-            <p:panelGrid align="center" styleClass="panelgrid_borderless">
+            <p:panelGrid styleClass="panelgrid_borderless">
                 <p:row>
                     <p:column>
                         <a href="profile.xhtml?username=#{tweet.user.username}">
@@ -34,5 +34,9 @@
                     </p:column>
                 </p:row>
             </p:panelGrid>
-    </p:dataList>  
+    </p:dataList>
+    
+    <p:panel header="Erro" rendered="#{userController.currentUser == null}">
+        <h:outputText value="User doesn't exist!"/>
+    </p:panel>
 </ui:composition>

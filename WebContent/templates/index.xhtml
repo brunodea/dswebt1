@@ -17,7 +17,7 @@
                               <p:row>
                                 <p:column><h:outputLabel for="username" styleClass="rotulo_login_signup" value="Username"/></p:column>
                                       <p:column>
-                                          <p:inputText id="username" value="#{userController.loggedUser.username}" required="true">
+                                          <p:inputText id="username" value="#{userController.dumbUser.username}" required="true">
                                                 <f:validateLength minimum="6"/>
                                        </p:inputText>
                                 </p:column>
@@ -25,7 +25,7 @@
                               <p:row>
                                  <p:column><h:outputLabel for="password" styleClass="rotulo_login_signup" value="Password"/></p:column>
                                            <p:column>
-                                                      <p:password id="password" value="#{userController.loggedUser.password}" required="true">
+                                                      <p:password id="password" value="#{userController.dumbUser.password}" required="true">
                                   <f:validateLength minimum="6"/>
                                                       </p:password>
                                                     </p:column>
@@ -47,7 +47,7 @@
 	                    <p:row>
 	                       <p:column ><h:outputLabel for="signup_fullname" styleClass="rotulo_login_signup" value="Fullname"/></p:column>
 	                        <p:column>
-	                            <p:inputText id="signup_fullname"  value="#{userController.loggedUser.fullname}" required="true">
+	                            <p:inputText id="signup_fullname"  value="#{userController.dumbUser.fullname}" required="true">
 	                                <f:validateLength minimum="6"/>
 	                            </p:inputText>
 	                        </p:column>
@@ -55,7 +55,7 @@
 	                    <p:row>
 	                        <p:column><h:outputLabel for="signup_username" styleClass="rotulo_login_signup" value="Username"/></p:column>
 	                        <p:column>
-	                            <p:inputText id="signup_username" value="#{userController.loggedUser.username}" required="true" >
+	                            <p:inputText id="signup_username" value="#{userController.dumbUser.username}" required="true" >
 	                                <f:validateLength minimum="6"/>
 	                            </p:inputText>
 	                        </p:column>
@@ -63,7 +63,7 @@
 	                    <p:row>
 	                        <p:column><h:outputLabel for="signup_password" styleClass="rotulo_login_signup"  value="Password"/></p:column>
 	                        <p:column>
-	                            <p:inputText id="signup_password" value="#{userController.loggedUser.password}" required="true">
+	                            <p:inputText id="signup_password" value="#{userController.dumbUser.password}" required="true">
 	                                <f:validateLength minimum="6"/>
 	                            </p:inputText>
 	                        </p:column>
