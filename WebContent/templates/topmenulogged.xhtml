@@ -10,11 +10,15 @@
             <ul>
                 <li> 
                 <a href="./profile.xhtml?username=#{userController.loggedUser.username}">  
-                    <h:outputText value="#{userController.loggedUser.fullname}" />  
+                    <h:outputText value="#{userController.loggedUser.fullname}"/>
                 </a>
                 </li>
                 <li>
-                    <h:outputText value="#{userController.loggedUser.username}"/>
+                    <h:form>
+						<p:commandLink actionListener="#{userController.logout}">
+						    <h:outputText value="Log Out"/>
+						</p:commandLink>
+					</h:form>
                 </li>
             </ul>
         </div>
