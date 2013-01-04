@@ -21,10 +21,22 @@ TABLE.panelGridClass {
     width: 300px;
 }
 
-.caixa_signup {
+.caixa_signup{
     position: relative;
     top: 15px;
     width: 300px;
+}
+
+.caixa_tweetar{
+    position: relative;
+    top: 15px;
+    width: 400px;
+}
+
+.caixa_timeline{
+    position: relative;
+    top: 15px;
+    width: 400px;
 }
 
 .painel {
