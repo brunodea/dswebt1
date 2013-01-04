@@ -26,6 +26,14 @@ public class FollowsController implements Serializable {
 	public void unfollow(User follower, User followed) {
 		new FollowsDAO().unfollow(follower, followed);
 	}
+	
+	public void toggleFollow(User follower, User followed) {
+		if(isFollowing(follower, followed)) {
+			unfollow(follower, followed);
+		} else {
+			startFollowing(follower, followed);
+		}
+	}
 
 	public boolean isFollowing(User follower, User followed) {
 		return new FollowsDAO().isFollowing(follower, followed);
