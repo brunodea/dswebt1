@@ -8,32 +8,38 @@
     <p:dataList value="#{userController.timeline}" var="tweet" id="timeline"  
         paginator="true" rows="5" effectSpeed="fast"  
         paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
-        rowsPerPageTemplate="10,20,30" type="none" rendered="#{userController.currentUser != null}">  
+        rowsPerPageTemplate="10,20,30" type="none" styleClass="caixa_timeline" rendered="#{userController.currentUser != null}">
   
-            <f:facet name="header">
-                <h:outputText value="Timeline de #{userController.currentUser.username}"/>
-            </f:facet>  
-  
-            <p:panelGrid styleClass="panelgrid_borderless">
-                <p:row>
-                    <p:column>
-                        <a href="profile.xhtml?username=#{tweet.user.username}">
-                            <h:outputText value="#{tweet.user.username}"/>
-                        </a>
-                    </p:column>
-                    <p:column>
-                        <h:outputText value="#{tweet.pubdate}"/>
-                    </p:column>
-                </p:row>
-                <p:row>
-                    <p:column>
-                        <p:graphicImage value="#{tweet.user.imagePath}"/>
-                    </p:column>
-                    <p:column>
-                        <h:outputText value="#{tweet.content}"/>
-                    </p:column>
-                </p:row>
-            </p:panelGrid>
+		<f:facet name="header">
+		    <h:outputText value="Timeline de #{userController.currentUser.username}"/>
+		</f:facet>
+
+        <p:panelGrid align="center" styleClass="panelgrid_borderless" columns="3">
+			<p:column></p:column>
+			<p:column></p:column>
+			<p:column>
+			    <div class="tweet_date">
+			        <h:outputText value="#{tweet.pubdate}"/>
+			    </div>
+			</p:column>
+			<p:column>
+                <div class="tweet_nick">
+	                <a href="profile.xhtml?username=#{tweet.user.username}">
+	                    <h:outputText value="#{tweet.user.username}"/>
+	                </a>
+			    </div>
+			</p:column>
+			<p:column>
+			    <div class="tweet_foto"> 
+			        <p:graphicImage value="#{tweet.user.imagePath}"/>
+			    </div>
+			</p:column>
+			<p:column>
+			    <div class="tweet_text">
+			        <h:outputText value="#{tweet.content}"/>
+			    </div>
+			</p:column>
+        </p:panelGrid>
     </p:dataList>
     
     <p:panel header="Erro" rendered="#{userController.currentUser == null}">

@@ -1,0 +1,58 @@
+
+.rotulologin_signup{
+
+    /*Especifica preta a cor da fonte do elemento */
+
+    color: #000000;
+    margin:3px 3px 3px 0px;
+    font-size: 14px;
+    font-family: serif;
+    font-weight: bold;
+}
+
+.tweet_nick {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 40px;
+    font-size: 90%;
+    font-style: italic;
+    font-family: fantasy;   
+    text-align: center;
+}
+
+.tweet_text {
+    position: relative;
+    top: 0px;
+    width: 180px;
+    word-break: break-all;
+    font-family: monospace;
+    background: black;
+    font-size: 100%;
+    font-weight: bold;
+    
+}
+
+.tweet_date {
+    position: relative;
+    top: 0px;
+    border-color: greenyellow;
+    border-width: 20px;
+    font-size: 70%;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.tweet_box{
+    border: 5px;
+    border-color: black;
+}
+
+.tweet_foto{
+   height: 40px;
+   width: 40px;
+   border: 1px;
+   border-color: black;
+   top: 10px;
+   alignment-adjust: middle;
+}

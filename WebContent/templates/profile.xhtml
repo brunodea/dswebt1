@@ -11,7 +11,9 @@
     
     <ui:define name="center_content">
         <div class="grid_6 prefix_3 suffix_3">
-            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+            <div class="mensagem_box">
+               <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+            </div>
         </div>
         <div class="clear"/>
         <div class="grid_6" align="center" hidden="#{userController.currentUserIsLoggedUser}">
