@@ -17,6 +17,11 @@
             <p:panelGrid align="center" styleClass="panelgrid_borderless">
                 <p:row>
                     <p:column>
+                        <p:graphicImage value="#{tweet.user.imagePath}"/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
                         <h:outputText value="#{tweet.user.username}"/>
                     </p:column>
                     <p:column>

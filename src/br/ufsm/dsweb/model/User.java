@@ -6,6 +6,11 @@ public class User extends Model implements Serializable {
 	private String mFullName;
 	private String mUsername;
 	private String mPassword;
+	private String mImagePath;
+	
+	public User() {
+		mImagePath = "../imgs/default.jpg";
+	}
 	
 	public String getFullname() {
 		return mFullName;
@@ -30,10 +35,18 @@ public class User extends Model implements Serializable {
 	public void setPassword(String password) {
 		this.mPassword = password;
 	}
+	
+	public String getImagePath() {
+		return mImagePath;
+	}
+	
+	public void setImagePath(String imagepath) {
+		mImagePath = imagepath;
+	}
 
 	@Override
 	public String toCSV() {
-		return getID()+","+getFullname()+","+getUsername()+","+getPassword();
+		return getID()+","+getFullname()+","+getUsername()+","+getPassword()+","+getImagePath();
 	}
 
 	@Override
@@ -43,5 +56,8 @@ public class User extends Model implements Serializable {
 		setFullname(vals[1]);
 		setUsername(vals[2]);
 		setPassword(vals[3]);
+		if(vals.length > 4) {
+			setImagePath(vals[4]);
+		}
 	}
 }
