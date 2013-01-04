@@ -1,0 +1,16 @@
+.footer { 
+	
+	text-align:center;
+        color: #FFFFFF;
+        font-size: 10px;
+	
+	z-index: 95469148; 
+	background: #112233; 
+        
+	
+	width: 100%;
+        border: 1px,1px,1px,1px;
+        border-color: white;
+	border-width: 1px 0; 
+	border-style: solid; 	
+}
