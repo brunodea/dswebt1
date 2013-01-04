@@ -10,11 +10,11 @@
             <ul>
                 <li> 
                 <a href="./profile.xhtml">  
-                    <h:outputText value="#{user.fullname}" />  
+                    <h:outputText value="#{userController.loggedUser.fullname}" />  
                 </a>
                 </li>
                 <li>
-                    <h:outputText value="#{user.username}"/>
+                    <h:outputText value="#{userController.loggedUser.username}"/>
                 </li>
             </ul>
         </div>

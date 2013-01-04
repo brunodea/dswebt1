@@ -19,15 +19,22 @@ public class UserDAO extends ModelDAO<User> {
 		return r != null && !r.equals("");
 	}
 	
-	public User login(String username, String password) {
+	public User getByUsername(String username) {
 		User res = null;
 		String csv = DBCore.getRowByCol(getFilename(), 2, username);
 		if(csv != null && !csv.equals("")) {
-			User aux = new User();
-			aux.fromCSV(csv);
-			if(aux.getPassword().equals(password)) {
-				res = aux;
-			}
+			res = new User();
+			res.fromCSV(csv);
+		}
+		
+		return res;
+	}
+	
+	public User login(String username, String password) {
+		User res = null;
+		User aux = getByUsername(username);
+		if(aux != null && aux.getPassword().equals(password)) {
+			res = aux;
 		}
 		return res;
 	}

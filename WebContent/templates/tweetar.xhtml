@@ -16,7 +16,7 @@
 	                </p:column>
 	                <p:column>
 	                    <p:commandButton id="tweetButton" value="Tweet!" update="@all" 
-	                       action="#{tweetController.doTweet(userController.user)}"/>
+	                       action="#{tweetController.doTweet(userController.currentUser)}"/>
 	                </p:column>
 		        </p:row>
 		        <p:row>

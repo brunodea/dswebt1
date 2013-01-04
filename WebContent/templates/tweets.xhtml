@@ -17,7 +17,9 @@
             <p:panelGrid align="center" styleClass="panelgrid_borderless">
                 <p:row>
                     <p:column>
-                        <h:outputText value="#{tweet.user.username}"/>
+                        <a href="profile.xhtml?username=#{tweet.user.username}">
+                            <h:outputText value="#{tweet.user.username}"/>
+                        </a>
                     </p:column>
                     <p:column>
                         <h:outputText value="#{tweet.pubdate}"/>
