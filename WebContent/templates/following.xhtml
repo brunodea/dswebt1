@@ -6,7 +6,7 @@
     xmlns:fn="http://java.sun.com/jsp/jstl/functions"
     xmlns:p="http://primefaces.org/ui">
 
-    <p:carousel value="#{userController.currentUserFollowing}" var="usr" itemStyleClass="">  
+    <p:carousel id="following" value="#{userController.currentUserFollowing}" var="usr" itemStyleClass="">  
         <f:facet name="header">
            <h:outputText value="Following"/>
         </f:facet>  

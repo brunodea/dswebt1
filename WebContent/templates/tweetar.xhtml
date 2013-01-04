@@ -7,7 +7,7 @@
 
     <h:form styleClass="caixa_tweetar">
         <p:panel header="Tweet" rendered="#{userController.currentUserIsLoggedUser}">
-	        <p:panelGrid id="tweet_grid" align="center" styleClass="panelgrid_borderless">
+	        <p:panelGrid align="center" styleClass="panelgrid_borderless">
 	            <p:row>
 	                <p:column>
 		            <p:inputTextarea rows="5" cols="43" counter="counter" maxlength="142"       
@@ -15,7 +15,7 @@
 		                value="#{tweetController.tweet.content}"  required="true"/>
 	                </p:column>
 	                <p:column>
-	                    <p:commandButton id="tweetButton" value="Tweet!" update="@all" 
+	                    <p:commandButton id="tweetButton" value="Tweet!" update=":timeline" 
 	                       action="#{tweetController.doTweet(userController.loggedUser)}"/>
 	                </p:column>
 		        </p:row>
