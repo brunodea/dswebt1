@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import br.ufsm.dsweb.dao.UserDAO;
+import br.ufsm.dsweb.db.DBCore;
 import br.ufsm.dsweb.util.Util;
 
 public class Tweet extends Model implements Serializable {
@@ -37,12 +38,13 @@ public class Tweet extends Model implements Serializable {
 
 	@Override
 	public String toCSV() {
-		return getID()+","+getUser().getID()+","+Util.dateToString(getPubdate())+","+getContent();
+		return getID()+DBCore.SEPARATOR+getUser().getID()+DBCore.SEPARATOR+
+				Util.dateToString(getPubdate())+DBCore.SEPARATOR+getContent();
 	}
 
 	@Override
 	public void fromCSV(String csv) {
-		String[] vals = csv.split(",");
+		String[] vals = csv.split(DBCore.SEPARATOR);
 		setID(Integer.parseInt(vals[0]));
 		setUser(new UserDAO().getByID(Integer.parseInt(vals[1])));
 		setPubdate(Util.stringToDate(vals[2]));

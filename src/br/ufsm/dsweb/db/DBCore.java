@@ -10,7 +10,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class DBCore {
-	private static String DB_PATH = "";
+	private static final String DB_PATH = "";
+	public static final String SEPARATOR = ",,,,,"; //separador de colunas.
 
 	private interface RowReader {
 		public boolean doSomething(String row, boolean has_next);
@@ -76,7 +77,7 @@ public class DBCore {
 		readFile(filename, new RowReader() {
 			@Override
 			public boolean doSomething(String row, boolean has_next) {
-				String[] vals = row.split(",");
+				String[] vals = row.split(SEPARATOR);
 				if(!vals[column].equals(value)) {
 					appendToFile(aux_filename, row);
 				}
@@ -92,7 +93,7 @@ public class DBCore {
 			@Override
 			public boolean doSomething(String row, boolean has_next) {
 				boolean keep = true;
-				String[] vals = row.split(",");
+				String[] vals = row.split(SEPARATOR);
 				if(vals[column].equals(value)) {
 					keep = false;
 				}
@@ -109,11 +110,10 @@ public class DBCore {
 		readFile(filename, new RowReader() {
 			@Override
 			public boolean doSomething(String row, boolean has_next) {
-				String []values = row.split(",");
+				String []values = row.split(SEPARATOR);
 				if(values[column].equals(value)) {
 					res.add(row);
 				}
-				
 				return true;
 			}
 		});
@@ -125,10 +125,7 @@ public class DBCore {
 		return readFile(filename, new RowReader() {			
 			@Override
 			public boolean doSomething(String row, boolean has_next) {
-				if(!has_next) {
-					return false;
-				}
-				return true;
+				return has_next;
 			}
 		});
 	}

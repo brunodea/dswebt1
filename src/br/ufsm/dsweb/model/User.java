@@ -2,6 +2,8 @@ package br.ufsm.dsweb.model;
 
 import java.io.Serializable;
 
+import br.ufsm.dsweb.db.DBCore;
+
 public class User extends Model implements Serializable {
 	private String mFullName;
 	private String mUsername;
@@ -46,12 +48,13 @@ public class User extends Model implements Serializable {
 
 	@Override
 	public String toCSV() {
-		return getID()+","+getFullname()+","+getUsername()+","+getPassword()+","+getImagePath();
+		return getID()+DBCore.SEPARATOR+getFullname()+DBCore.SEPARATOR+getUsername()+
+				DBCore.SEPARATOR+getPassword()+DBCore.SEPARATOR+getImagePath();
 	}
 
 	@Override
 	public void fromCSV(String csv) {
-		String[] vals = csv.split(",");
+		String[] vals = csv.split(DBCore.SEPARATOR);
 		setID(Integer.parseInt(vals[0]));
 		setFullname(vals[1]);
 		setUsername(vals[2]);

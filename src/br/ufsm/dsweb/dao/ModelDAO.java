@@ -6,6 +6,7 @@ import br.ufsm.dsweb.model.Model;
 public abstract class ModelDAO<T extends Model> {
 	private T mSubModel;
 	private String mFilename;
+
 	public ModelDAO(T submodel, String filename) {
 		mSubModel = submodel;
 		mFilename = filename;
@@ -37,7 +38,7 @@ public abstract class ModelDAO<T extends Model> {
 		
 		String last_row = DBCore.getLastRow(mFilename);
 		if(!last_row.equals("")) {
-			String[] vals = last_row.split(",");
+			String[] vals = last_row.split(DBCore.SEPARATOR);
 			last_id = Integer.parseInt(vals[0]);
 		}
 		
