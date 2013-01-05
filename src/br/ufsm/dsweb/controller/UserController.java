@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -94,6 +95,26 @@ public class UserController implements Serializable {
 		}
 		tweets.addAll(new UserDAO().getAllTweets(getCurrentUser()));
 		tweets.addAll(new RetweetDAO().getRetweetsOf(getCurrentUser()));
+		
+		Iterator<Tweet> it = tweets.iterator();
+		while(it.hasNext()) {
+			Tweet t = it.next();
+			boolean delete = false;
+			int num = 0;
+			for(Tweet twt : tweets) {
+				if(twt.getID() == t.getID()) {
+					num++;
+				}
+				if(num > 1) {
+					delete = true;
+					break;
+				}
+			}
+			if(delete) {
+				it.remove();
+			}
+		}
+		
 		Collections.sort(tweets, new Comparator<Tweet>() {
 			@Override
 			public int compare(Tweet lhs, Tweet rhs) {
@@ -129,6 +150,9 @@ public class UserController implements Serializable {
 	
 	public boolean isLogged() {
 		return FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("user");
+	}
+	public boolean getIsLogged() {
+		return isLogged();
 	}
 	public List<User> getCurrentUserFollowers() {
 		return new FollowsDAO().getFollowers(getCurrentUser());

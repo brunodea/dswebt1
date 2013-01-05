@@ -1,5 +1,6 @@
 package br.ufsm.dsweb.model;
 
+import br.ufsm.dsweb.dao.TweetDAO;
 import br.ufsm.dsweb.dao.UserDAO;
 import br.ufsm.dsweb.db.DBCore;
 
@@ -33,6 +34,6 @@ public class Retweet extends Model {
 	public void fromCSV(String csv) {
 		String[] vals = csv.split(DBCore.SEPARATOR);
 		setUser(new UserDAO().getByID(Integer.parseInt(vals[0])));
-		setUser(new UserDAO().getByID(Integer.parseInt(vals[1])));
+		setTweet(new TweetDAO().getByID(Integer.parseInt(vals[1])));
 	}
 }
