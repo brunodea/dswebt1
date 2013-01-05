@@ -66,6 +66,24 @@ public class UserController implements Serializable {
 			}
 		}
 	}
+	public void editProfile() {
+		UserDAO udao = new UserDAO();
+		FacesMessage message = null;
+		User curr = getCurrentUser();
+		if(udao.usernameExists(curr.getUsername())) {
+			message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalida username", "Username already taken.");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success!", "Changes made with success.");
+			udao.update(curr);
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml?username="+curr.getUsername());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
 	
 	public List<Tweet> getTimeline() {
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
