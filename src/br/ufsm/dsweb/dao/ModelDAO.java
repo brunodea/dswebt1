@@ -33,6 +33,9 @@ public abstract class ModelDAO<T extends Model> {
 	public void removeByCols(HashMap<Integer,String> col_vals) {
 		DBCore.removeRowByCols(mFilename, col_vals);
 	}
+	public void update(T model) {
+		DBCore.updateRowByCol(mFilename, model.toCSV(), 0, model.getID()+"");
+	}
 	
 	public String getFilename() {
 		return mFilename;
