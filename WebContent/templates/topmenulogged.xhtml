@@ -9,9 +9,9 @@
         <div id="topmenu">
             <ul>
                 <li> 
-                <a href="./profile.xhtml?username=#{userController.loggedUser.username}">  
-                    <h:outputText value="#{userController.loggedUser.fullname}"/>
-                </a>
+	                <a href="./profile.xhtml?username=#{userController.loggedUser.username}">  
+	                    <h:outputText value="#{userController.loggedUser.fullname}"/>
+	                </a>
                 </li>
                 <li>
                     <h:form>
@@ -19,6 +19,11 @@
 						    <h:outputText value="Log Out"/>
 						</p:commandLink>
 					</h:form>
+                </li>
+                <li>
+	                <a href="./editprofile.xhtml">  
+	                    <h:outputText value="Edit Profile"/>
+	                </a>
                 </li>
             </ul>
         </div>
