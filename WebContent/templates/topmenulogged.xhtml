@@ -16,12 +16,10 @@
 	            </a>
                 </div>
                 <h:form styleClass="toplogout">
-                    <h:selectOneMenu id="language" value="#{languageController.currentLanguage.languageName}">  
-                        <f:selectItem itemLabel="#{languageController.currentLanguage.selectOne()}" itemValue=""/>
+                    <p:selectOneMenu id="language" value="#{languageController.currentLanguage.languageName}">
+                        <p:ajax listener="#{languageController.changeLanguage()}"/>
                         <f:selectItems value="#{languageController.languages}"/>
-                        <p:ajax update=""  
-                            listener="#{languageController.changeLanguage}" />  
-                    </h:selectOneMenu>
+                    </p:selectOneMenu>
                 </h:form>
                 <h:form styleClass="toplogout">
                     <p:commandLink id="logoutlink" actionListener="#{userController.logout}">
