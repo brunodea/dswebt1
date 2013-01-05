@@ -126,6 +126,38 @@ public class DBCore {
 		return row;
 	}
 	
+	public static synchronized void updateRowByCol(String filename, String new_row, int column, String value) {
+		HashMap<Integer, String> col_vals = new HashMap<Integer, String>();
+		col_vals.put(column, value);
+		
+		updateRowByCols(filename, new_row, col_vals);
+	}
+	
+	public static synchronized void updateRowByCols(String filename, final String new_row, final HashMap<Integer, String> col_vals) {
+		final String aux_filename = "aux_"+filename;
+		File new_file = createFileIfNotExists(aux_filename);
+		readFile(filename, new RowReader() {
+			@Override
+			public boolean doSomething(String row, boolean has_next) {
+				String[] vals = row.split(SEPARATOR);
+				boolean found = true;
+				for(Integer col : col_vals.keySet()) {
+					if(!vals[col].equals(col_vals.get(col))) {
+						found = false;
+						break;
+					}
+				}
+				if(found) {
+					row = new_row;
+				}
+				appendToFile(aux_filename, row);
+				return true;
+			}
+		});
+		File old_file = createFileIfNotExists(filename);
+		new_file.renameTo(old_file);
+	}
+	
 	public static synchronized ArrayList<String> getAllRowsByCol(String filename, final int column, final String value) {
 		HashMap<Integer, String> col_vals = new HashMap<Integer, String>();
 		col_vals.put(column, value);
