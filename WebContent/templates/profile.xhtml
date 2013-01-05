@@ -17,7 +17,6 @@
         </div>
         <div class="clear"/>
         <div class="grid_6">
-
             <div class="grid_6" align="center" hidden="#{userController.currentUserIsLoggedUser}">
                 <ui:include src="tweetar.xhtml"/>
             </div>
@@ -30,7 +29,7 @@
                 <ui:include src="following.xhtml"/>
             </div>
         </div>
-        <div class="grid_6 #{userController.currentUserIsLoggedUser ? '' : 'prefix_3'}" align="center">
+        <div class="grid_6" align="center">
             <ui:include src="tweets.xhtml"/>
         </div>     
     </ui:define>
