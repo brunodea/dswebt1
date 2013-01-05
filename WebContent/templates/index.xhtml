@@ -12,11 +12,11 @@
         <div class="clear"/>
         <div class="grid_4 prefix_1 suffix_1">
 	    <h:form styleClass="caixa_login">
-            <p:panel id="login_panel" header="Login" styleClass="painel">
+            <p:panel id="login_panel" header="#{languageController.currentLanguage.login}" styleClass="painel">
                 <p:panelGrid id="login_grid" align="center" styleClass="panelgrid_borderless">
                     <p:row>
                         <p:column>
-                            <h:outputLabel for="username" styleClass="rotulo_login_signup" value="Username"/>
+                            <h:outputLabel for="username" styleClass="rotulo_login_signup" value="#{languageController.currentLanguage.username}"/>
                         </p:column>
                         <p:column>
                             <p:inputText id="username" value="#{userController.dumbUser.username}" required="true">
@@ -26,7 +26,7 @@
                     </p:row>
                     <p:row>
 	                    <p:column>
-	                        <h:outputLabel for="password" styleClass="rotulo_login_signup" value="Password"/>
+	                        <h:outputLabel for="password" styleClass="rotulo_login_signup" value="#{languageController.currentLanguage.password}"/>
 	                    </p:column>
 	                    <p:column>
 	                        <p:password id="password" value="#{userController.dumbUser.password}" required="true">
@@ -36,7 +36,7 @@
                     </p:row>
                     <p:row>
                         <p:column colspan="2">
-                            <p:commandButton id="loginButton" value="Login" update="login_panel" 
+                            <p:commandButton id="loginButton" value="#{languageController.currentLanguage.login}" update="login_panel" 
                                 action="#{userController.login()}"/>
                         </p:column>
                     </p:row>
@@ -46,11 +46,11 @@
         </div>
         <div class="grid_4 prefix_1 suffix_1">
             <h:form styleClass="caixa_signup">
-	            <p:panel id="signup_panel" header="Sign Up" styleClass="painel">
+	            <p:panel id="signup_panel" header="#{languageController.currentLanguage.signup}" styleClass="painel">
 	                <p:panelGrid id="signup_grid" styleClass="panelgrid_borderless" >
 	                    <p:row>
 	                       <p:column>
-	                           <h:outputLabel for="signup_fullname" styleClass="rotulo_login_signup" value="Fullname"/>
+	                           <h:outputLabel for="signup_fullname" styleClass="rotulo_login_signup" value="#{languageController.currentLanguage.fullName}"/>
 	                       </p:column>
 	                       <p:column>
 	                           <p:inputText id="signup_fullname"  value="#{userController.dumbUser.fullname}" required="true">
@@ -60,7 +60,7 @@
 	                    </p:row>
 	                    <p:row>
 	                        <p:column>
-	                           <h:outputLabel for="signup_username" styleClass="rotulo_login_signup" value="Username"/>]
+	                           <h:outputLabel for="signup_username" styleClass="rotulo_login_signup" value="#{languageController.currentLanguage.username}"/>]
 	                        </p:column>
 	                        <p:column>
 	                           <p:inputText id="signup_username" value="#{userController.dumbUser.username}" required="true" >
@@ -70,7 +70,7 @@
 	                    </p:row>
 	                    <p:row>
 	                        <p:column>
-	                           <h:outputLabel for="signup_password" styleClass="rotulo_login_signup"  value="Password"/>
+	                           <h:outputLabel for="signup_password" styleClass="rotulo_login_signup"  value="#{languageController.currentLanguage.password}"/>
 	                        </p:column>
 	                        <p:column>
 	                            <p:inputText id="signup_password" value="#{userController.dumbUser.password}" required="true">
@@ -80,7 +80,7 @@
 	                    </p:row>
 	                    <p:row>
 	                        <p:column>
-                                <p:commandButton id="signupButton" value="Sign Up" update="signup_panel" 
+                                <p:commandButton id="signupButton" value="#{languageController.currentLanguage.signup}" update="signup_panel" 
 	                                action="#{userController.signup()}"/>
 	                        </p:column>
 	                    </p:row>

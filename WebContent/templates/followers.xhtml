@@ -8,14 +8,14 @@
 
     <h:form id="followbuttonform">
         <p:commandButton id="followButton" 
-            value="#{followsController.isFollowing(userController.loggedUser, userController.currentUser) ? 'Unfollow' : 'Follow'}" 
+            value="#{followsController.isFollowing(userController.loggedUser, userController.currentUser) ? languageController.currentLanguage.unfollow : languageController.currentLanguage.follow}" 
             update=":followbuttonform,:followers" 
             rendered="#{!userController.currentUserIsLoggedUser}"
             actionListener="#{followsController.toggleFollow(userController.loggedUser, userController.currentUser)}"/>
     </h:form>
 	<p:carousel id="followers" value="#{userController.currentUserFollowers}" var="usr" itemStyleClass="">  
 	    <f:facet name="header">
-	       <h:outputText value="Followers"/>
+	       <h:outputText value="#{languageController.currentLanguage.followers}"/>
 	    </f:facet>  
 	    <p:panelGrid styleClass="panelgrid_borderless">
 	       <p:row>
@@ -32,7 +32,7 @@
 	       </p:row>
 	    </p:panelGrid>
 	    <f:facet name="footer">  
-            <h:outputText value="#{fn:length(userController.currentUserFollowers)} followers."/>
+            <h:outputText value="#{fn:length(userController.currentUserFollowers)} #{languageController.currentLanguage.followers}."/>
 	    </f:facet>  
 	</p:carousel>
 </ui:composition>

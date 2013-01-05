@@ -8,7 +8,11 @@
     <div class="grid_12">
 		<div id="topmenu">
 		    <ul>
-		        <li><a href="index.xhtml">Bem Vindo!</a></li>
+		        <li>
+		            <a href="index.xhtml">
+		              <h:outputText value="#{languageController.currentLanguage.welcome}"/>
+                    </a>
+                </li>
 		    </ul> 
 		</div>
 	</div>

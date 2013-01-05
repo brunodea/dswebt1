@@ -11,7 +11,7 @@
         rowsPerPageTemplate="10,20,30" type="none" styleClass="caixa_timeline" rendered="#{userController.currentUser != null}">
   
 		<f:facet name="header">
-		    <h:outputText value="Timeline de #{userController.currentUser.username}"/>
+		    <h:outputText value="#{languageController.currentLanguage.timelineOf} #{userController.currentUser.username}"/>
 		</f:facet>
 
         <p:panelGrid align="center" styleClass="panelgrid_borderless" columns="3">
@@ -45,20 +45,20 @@
                 <p:column rendered="#{userController.isLogged}">
                     <h:form>
 	                    <p:commandButton id="followButton"
-				            value="#{tweetController.isRetweetFromUser(tweet,userController.loggedUser) ? 'Unretweet' : 'Retweet'}" 
+				            value="#{tweetController.isRetweetFromUser(tweet,userController.loggedUser) ? languageController.currentLanguage.unretweet : languageController.currentLanguage.retweet}" 
 				            update=":timeline"
 				            rendered="#{!tweetController.isTweetFromUser(tweet,userController.loggedUser)}"
 				            actionListener="#{tweetController.toggleRetweet(tweet,userController.loggedUser)}"/>
                     </h:form>
                 </p:column>
                 <p:column>
-                    <h:outputText value="#{tweetController.numRetweets(tweet)} retweets."/>
+                    <h:outputText value="#{tweetController.numRetweets(tweet)} #{languageController.currentLanguage.retweets}"/>
                 </p:column>
             </p:row>
         </p:panelGrid>
     </p:dataList>
     
     <p:panel header="Erro" rendered="#{userController.currentUser == null}">
-        <h:outputText value="User doesn't exist!"/>
+        <h:outputText value="#{languageController.currentLanguage.userDoesntExist}"/>
     </p:panel>
 </ui:composition>

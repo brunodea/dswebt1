@@ -12,14 +12,22 @@
                         <h:outputText  styleClass="topnick" value="#{userController.loggedUser.fullname}"/>
 	            </a>       
 	            <a href="./editprofile.xhtml">  
-	                <h:outputText value="Edit Profile" styleClass="topedit"/>
+	                <h:outputText value="#{languageController.currentLanguage.editProfile}" styleClass="topedit"/>
 	            </a>
                 </div>
-                <h:form styleClass="toplogout">                        
-                    <p:commandLink actionListener="#{userController.logout}">
-                        <h:outputText styleClass="toplogout" value="Log Out"/>
+                <h:form>
+                    <h:selectOneMenu id="language" value="#{languageController.currentLanguage.languageName}">  
+                        <f:selectItem itemLabel="#{languageController.currentLanguage.selectOne()}" itemValue=""/>
+                        <f:selectItems value="#{languageController.languages}"/>
+                        <p:ajax update=""  
+                            listener="#{languageController.changeLanguage}" />  
+                    </h:selectOneMenu>
+                </h:form>
+                <h:form styleClass="toplogout">
+                    <p:commandLink id="logoutlink" actionListener="#{userController.logout}">
+                        <h:outputText styleClass="toplogout" value="#{languageController.currentLanguage.logout}"/>
                     </p:commandLink>
-		</h:form>
+		        </h:form>
         </div>
     </div>
     <div class="clear"/>

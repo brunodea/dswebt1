@@ -6,16 +6,16 @@
     xmlns:p="http://primefaces.org/ui">
 
     <h:form styleClass="caixa_tweetar">
-        <p:panel header="Tweet" rendered="#{userController.currentUserIsLoggedUser}">
+        <p:panel header="#{languageController.currentLanguage.tweet}" rendered="#{userController.currentUserIsLoggedUser}">
 	        <p:panelGrid align="center" styleClass="panelgrid_borderless">
 	            <p:row>
 	                <p:column>
 		            <p:inputTextarea rows="5" cols="43" counter="counter" maxlength="142"       
-		                counterTemplate="{0} characters remaining." autoResize="true"
+		                counterTemplate="{0} #{languageController.currentLanguage.charactersRemaining}." autoResize="true"
 		                value="#{tweetController.tweet.content}"  required="true"/>
 	                </p:column>
 	                <p:column>
-	                    <p:commandButton id="tweetButton" value="Tweet!" update=":timeline" 
+	                    <p:commandButton id="tweetButton" value="#{languageController.currentLanguage.tweet}!" update=":timeline" 
 	                       action="#{tweetController.doTweet(userController.loggedUser)}"/>
 	                </p:column>
 		        </p:row>

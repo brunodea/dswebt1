@@ -8,7 +8,7 @@
 
     <p:carousel id="following" value="#{userController.currentUserFollowing}" var="usr" itemStyleClass="">  
         <f:facet name="header">
-           <h:outputText value="Following"/>
+           <h:outputText value="#{languageController.currentLanguage.following}"/>
         </f:facet>  
         <p:panelGrid styleClass="panelgrid_borderless">
            <p:row>
@@ -25,7 +25,7 @@
            </p:row>
         </p:panelGrid>
         <f:facet name="footer">
-            <h:outputText value="Following #{fn:length(userController.currentUserFollowing)} users."/>
+            <h:outputText value="Following #{fn:length(userController.currentUserFollowing)} #{languageController.currentLanguage.users}."/>
         </f:facet>  
     </p:carousel>
 </ui:composition>
