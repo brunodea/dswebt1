@@ -35,6 +35,63 @@
 	text-align: center; 
 	font-size: 14px; 
 	font-weight: bold; 
+        top:9px;
+
+}
+
+.topmenuh { 
+	list-style-type: none; 
+	display: inline; 
+	color: #555; 
+	cursor: pointer; 
+	line-height: 26px; 
+	text-align: center; 
+	font-size: 14px; 
+	font-weight: bold; 
+        top:9px;
+}
+
+.topedit { 
+	list-style-type: none; 
+	display: inline; 
+	color: #555; 
+	cursor: pointer; 
+	line-height: 26px; 
+	text-align: center; 
+	font-size: 14px; 
+	font-weight: bold; 
+        position: relative;
+        top:9px;
+        right: 280px
+}
+
+
+.topnick { 
+	list-style-type: none; 
+	display: inline; 
+	color: #555; 
+	cursor: pointer; 
+	line-height: 26px; 
+	text-align: center; 
+	font-size: 14px; 
+	font-weight: bold; 
+        position: relative;
+        top:9px;
+        right: 300px
+}
+
+.toplogout { 
+	list-style-type: none; 
+	display: inline; 
+	color: #555; 
+	cursor: pointer; 
+	line-height: 26px; 
+	text-align: center; 
+	font-size: 14px; 
+	font-weight: bold; 
+        position: relative;
+        top:4px;
+        left: 150px;
 }
 
 #topmenu li a { 

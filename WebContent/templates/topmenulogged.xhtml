@@ -7,25 +7,19 @@
     
     <div class="grid_12">
         <div id="topmenu">
-            <ul>
-                <li> 
-	                <a href="./profile.xhtml?username=#{userController.loggedUser.username}">  
-	                    <h:outputText value="#{userController.loggedUser.fullname}"/>
-	                </a>
-                </li>
-                <li>
-                    <h:form>
-						<p:commandLink actionListener="#{userController.logout}">
-						    <h:outputText value="Log Out"/>
-						</p:commandLink>
-					</h:form>
-                </li>
-                <li>
-	                <a href="./editprofile.xhtml">  
-	                    <h:outputText value="Edit Profile"/>
-	                </a>
-                </li>
-            </ul>
+                <div class="topmenuh">                 
+	            <a href="./profile.xhtml?username=#{userController.loggedUser.username}">  
+                        <h:outputText  styleClass="topnick" value="#{userController.loggedUser.fullname}"/>
+	            </a>       
+	            <a href="./editprofile.xhtml">  
+	                <h:outputText value="Edit Profile" styleClass="topedit"/>
+	            </a>
+                </div>
+                <h:form styleClass="toplogout">                        
+                    <p:commandLink actionListener="#{userController.logout}">
+                        <h:outputText styleClass="toplogout" value="Log Out"/>
+                    </p:commandLink>
+		</h:form>
         </div>
     </div>
     <div class="clear"/>
