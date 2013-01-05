@@ -4,6 +4,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
+    
 <h:head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/reset.css"/>
@@ -15,15 +16,14 @@
     <link rel="stylesheet" href="css/footer.css"/>
     <link rel="StyleSheet" type="text/css" href="css/jsf.css" media="screen" />
     <link rel="StyleSheet" type="text/css" href="css/tweets.css" media="screen" />	
+    <link rel="StyleSheet" type="text/css" href="css/follow.css" media="screen" />
     
     <title>Twitcher!</title>
 </h:head>
 <body>
     <div class="container_12" style="margin: 0 auto;">
         <ui:include src="#{pageController.topMenu}"/>
-        
 	    <ui:insert name="center_content">stuff stuff</ui:insert>
-
         <ui:include src="./footer.xhtml"/>
     </div>
 </body>
