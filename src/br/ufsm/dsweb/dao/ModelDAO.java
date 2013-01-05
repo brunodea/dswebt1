@@ -40,8 +40,15 @@ public abstract class ModelDAO<T extends Model> {
 	public ArrayList<T> getAllByCol(int col, String value) {
 		ArrayList<T> list = new ArrayList<T>();
 		for(String csv : DBCore.getAllRowsByCol(getFilename(), col, value)) {
-			mModel.fromCSV(csv);
-			list.add(mModel);
+			try {
+				T model = (T)mModel.getClass().newInstance();
+				model.fromCSV(csv);
+				list.add(model);
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
 		}
 		return list;
 	}
