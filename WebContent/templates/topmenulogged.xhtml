@@ -15,7 +15,7 @@
 	                <h:outputText value="#{languageController.currentLanguage.editProfile}" styleClass="topedit"/>
 	            </a>
                 </div>
-                <h:form>
+                <h:form styleClass="toplogout">
                     <h:selectOneMenu id="language" value="#{languageController.currentLanguage.languageName}">  
                         <f:selectItem itemLabel="#{languageController.currentLanguage.selectOne()}" itemValue=""/>
                         <f:selectItems value="#{languageController.languages}"/>
