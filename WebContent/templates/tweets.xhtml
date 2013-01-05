@@ -11,54 +11,59 @@
         rowsPerPageTemplate="10,20,30" type="none" styleClass="caixa_timeline" rendered="#{userController.currentUser != null}">
   
 		<f:facet name="header">
-		    <h:outputText value="#{languageController.currentLanguage.timelineOf} #{userController.currentUser.username}"/>
+		    <h:outputText value="Timeline de #{userController.currentUser.username}"/>
 		</f:facet>
 
-        <p:panelGrid align="center" styleClass="panelgrid_borderless" columns="3">
+        <p:panelGrid styleClass="panelgrid_borderless" columns="0">
             <p:row>
-				<p:column></p:column>
-				<p:column></p:column>
-				<p:column>
-				    <div class="tweet_date">
-				        <h:outputText value="#{tweet.pubdate}"/>
-				    </div>
-				</p:column>
-				<p:column>
-	                <div class="tweet_nick">
-		                <a href="profile.xhtml?username=#{tweet.user.username}">
-		                    <h:outputText value="#{tweet.user.username}"/>
-		                </a>
-				    </div>
-				</p:column>
-				<p:column>
-				    <div class="tweet_foto"> 
-				        <p:graphicImage value="#{tweet.user.imagePath}"/>
-				    </div>
-				</p:column>
-				<p:column>
-				    <div class="tweet_text">
-				        <h:outputText value="#{tweet.content}"/>
-				    </div>
-				</p:column>
+                <p:column></p:column>
+		
+                <p:column colspan="2">
+		    <div class="tweet_date">
+		        <h:outputText value="#{tweet.pubdate}"/>
+		    </div>
+		</p:column>
+                
             </p:row>
             <p:row>
+                <p:column>
+                    <div class="tweet_nick">
+                        <a href="profile.xhtml?username=#{tweet.user.username}">
+                            <h:outputText value="#{tweet.user.username}"/>
+		        </a>
+		   </div>
+                   <div class="tweet_foto"> 
+		       <p:graphicImage value="#{tweet.user.imagePath}"/>
+		   </div>
+		</p:column>
+                
+                <p:column colspan="2">
+		    <div class="tweet_text">
+		        <h:outputText value="#{tweet.content}"/>
+		    </div>
+		</p:column>
+                
+            </p:row>
+            <p:row>
+               <p:column></p:column>
+                
+                <p:column>
+                    <h:outputText value="#{tweetController.numRetweets(tweet)} retweets."/>
+                </p:column>
                 <p:column rendered="#{userController.isLogged}">
                     <h:form>
-	                    <p:commandButton id="followButton"
-				            value="#{tweetController.isRetweetFromUser(tweet,userController.loggedUser) ? languageController.currentLanguage.unretweet : languageController.currentLanguage.retweet}" 
+                        <p:commandButton id="followButton"
+				            value="#{tweetController.isRetweetFromUser(tweet,userController.loggedUser) ? 'Unretweet' : 'Retweet'}" 
 				            update=":timeline"
 				            rendered="#{!tweetController.isTweetFromUser(tweet,userController.loggedUser)}"
 				            actionListener="#{tweetController.toggleRetweet(tweet,userController.loggedUser)}"/>
                     </h:form>
-                </p:column>
-                <p:column>
-                    <h:outputText value="#{tweetController.numRetweets(tweet)} #{languageController.currentLanguage.retweets}"/>
                 </p:column>
             </p:row>
         </p:panelGrid>
     </p:dataList>
     
     <p:panel header="Erro" rendered="#{userController.currentUser == null}">
-        <h:outputText value="#{languageController.currentLanguage.userDoesntExist}"/>
+        <h:outputText value="User doesn't exist!"/>
     </p:panel>
 </ui:composition>

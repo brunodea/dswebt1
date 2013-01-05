@@ -12,8 +12,8 @@
 
 .tweet_nick {
     position: relative;
-    left: 0px;
-    text-align: center;
+    right: 40px;
+    bottom: 10px;
     width: 90px;
     font-size: 110%;
     font-family: cursive;   
@@ -51,13 +51,14 @@
 }
 
 .tweet_foto{
+   position: relative;
    height: 40px;
    width: 40px;
    border: 1px;
    border-color: black;
-   top: 10px;
    alignment-adjust: middle;
    padding:1px;
+   right: 15px;
    border:1px solid #021a40;
    background-color:#F1F1F1;
 }
