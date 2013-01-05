@@ -6,11 +6,11 @@ import br.ufsm.dsweb.db.DBCore;
 import br.ufsm.dsweb.model.Model;
 
 public abstract class ModelDAO<T extends Model> {
-	private T mSubModel;
+	private T mModel;
 	private String mFilename;
 
-	public ModelDAO(T submodel, String filename) {
-		mSubModel = submodel;
+	public ModelDAO(T model, String filename) {
+		mModel = model;
 		mFilename = filename;
 	}
 
@@ -18,14 +18,14 @@ public abstract class ModelDAO<T extends Model> {
 		T res = null;
 		String csv = DBCore.getRowByCol(mFilename, 0, String.valueOf(model_id));
 		if(!csv.equals("")) {
-			mSubModel.fromCSV(csv);
-			res = mSubModel;
+			mModel.fromCSV(csv);
+			res = mModel;
 		}
 		return res;
 	}
-	public void save(T submodel) {
-		submodel.setID(getLastID()+1);
-		DBCore.appendToFile(mFilename, submodel.toCSV());
+	public void save(T model) {
+		model.setID(getLastID()+1);
+		DBCore.appendToFile(mFilename, model.toCSV());
 	}
 	public void removeByID(int model_id) {
 		DBCore.removeRowByCol(mFilename, 0, model_id+"");
