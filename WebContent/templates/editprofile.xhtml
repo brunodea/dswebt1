@@ -1,0 +1,54 @@
+<ui:composition template="./main.xhtml" 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="center_content">
+        <div class="grid_6 prefix_3 suffix_3">
+		    <h:form>
+			    <p:panel id="editpanel" header="Editar Perfil">
+			        <p:panelGrid id="editgrid" styleClass="panelgrid_borderless">
+			            <p:row>
+			                <p:column>
+			                    <h:outputLabel for="edit_fullname" styleClass="" value="Fullname"/>
+			                </p:column>
+			                <p:column>
+			                    <p:inputText id="edit_fullname"  value="#{userController.loggedUser.fullname}" required="true">
+			                        <f:validateLength minimum="6"/>
+			                    </p:inputText>
+			                </p:column>
+			            </p:row>
+		                <p:row>
+		                    <p:column>
+		                        <h:outputLabel for="edit_username" styleClass="" value="Username"/>
+		                    </p:column>
+		                    <p:column>
+		                        <p:inputText id="edit_username"  value="#{userController.loggedUser.username}" required="true">
+		                            <f:validateLength minimum="6"/>
+		                        </p:inputText>
+		                    </p:column>
+		                </p:row>
+		                <p:row>
+		                    <p:column>
+		                        <h:outputLabel for="edit_password" styleClass="" value="Password"/>
+		                    </p:column>
+		                    <p:column>
+		                        <p:inputText id="edit_password"  value="#{userController.loggedUser.password}" required="true">
+		                            <f:validateLength minimum="6"/>
+		                        </p:inputText>
+		                    </p:column>
+		                </p:row>
+		                <p:row>
+		                    <p:column colspan="2">
+			                    <p:commandButton id="doneButton" value="Done" update="editpanel" action="#{userController.editProfile()}"/>
+		                    </p:column>
+		                </p:row>
+			        </p:panelGrid>
+			    </p:panel>
+		    </h:form>
+        </div>
+        <div class="clear"/>
+    </ui:define>
+</ui:composition>
