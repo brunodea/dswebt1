@@ -40,14 +40,7 @@ public class UserDAO extends ModelDAO<User> {
 	}
 	
 	public ArrayList<Tweet> getAllTweets(User user) {
-		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
-		for(String csv : DBCore.getAllRowsByCol(new TweetDAO().getFilename(), 1, user.getID()+"")) {
-			Tweet tweet = new Tweet();
-			tweet.fromCSV(csv);
-			
-			tweets.add(tweet);
-		}
-		
+		ArrayList<Tweet> tweets = new TweetDAO().getAllByCol(1, user.getID()+"");		
 		Collections.sort(tweets, new Comparator<Tweet>() {
 			@Override
 			public int compare(Tweet lhs, Tweet rhs) {

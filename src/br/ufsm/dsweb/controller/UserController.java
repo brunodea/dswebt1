@@ -13,6 +13,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import br.ufsm.dsweb.dao.FollowsDAO;
+import br.ufsm.dsweb.dao.RetweetDAO;
 import br.ufsm.dsweb.dao.UserDAO;
 import br.ufsm.dsweb.model.Tweet;
 import br.ufsm.dsweb.model.User;
@@ -89,8 +90,10 @@ public class UserController implements Serializable {
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
 		for(User user : getCurrentUserFollowing()) {
 			tweets.addAll(new UserDAO().getAllTweets(user));
+			tweets.addAll(new RetweetDAO().getRetweetsOf(user));
 		}
 		tweets.addAll(new UserDAO().getAllTweets(getCurrentUser()));
+		tweets.addAll(new RetweetDAO().getRetweetsOf(getCurrentUser()));
 		Collections.sort(tweets, new Comparator<Tweet>() {
 			@Override
 			public int compare(Tweet lhs, Tweet rhs) {

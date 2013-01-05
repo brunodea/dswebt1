@@ -1,5 +1,6 @@
 package br.ufsm.dsweb.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import br.ufsm.dsweb.db.DBCore;
@@ -35,6 +36,14 @@ public abstract class ModelDAO<T extends Model> {
 	}
 	public void update(T model) {
 		DBCore.updateRowByCol(mFilename, model.toCSV(), 0, model.getID()+"");
+	}
+	public ArrayList<T> getAllByCol(int col, String value) {
+		ArrayList<T> list = new ArrayList<T>();
+		for(String csv : DBCore.getAllRowsByCol(getFilename(), col, value)) {
+			mModel.fromCSV(csv);
+			list.add(mModel);
+		}
+		return list;
 	}
 	
 	public String getFilename() {
