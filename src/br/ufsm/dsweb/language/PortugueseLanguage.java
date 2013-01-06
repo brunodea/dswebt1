@@ -156,4 +156,14 @@ public class PortugueseLanguage implements LanguageInterface {
 	public String getSuccessChanges() {
 		return "Alterações feitas com sucesso";
 	}
+
+	@Override
+	public String getResults() {
+		return "Resultados";
+	}
+
+	@Override
+	public String getSearch() {
+		return "Buscar";
+	}
 }

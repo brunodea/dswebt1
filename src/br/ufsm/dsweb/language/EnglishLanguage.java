@@ -160,4 +160,14 @@ public class EnglishLanguage implements LanguageInterface {
 	public String getTimelineOf() {
 		return "Timeline of";
 	}
+
+	@Override
+	public String getResults() {
+		return "Results";
+	}
+
+	@Override
+	public String getSearch() {
+		return "Search";
+	}
 }

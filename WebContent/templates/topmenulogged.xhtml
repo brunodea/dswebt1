@@ -14,15 +14,19 @@
 	            <a href="./editprofile.xhtml">  
 	                <h:outputText value="#{languageController.currentLanguage.editProfile}" styleClass="topedit"/>
 	            </a>
-                    <a href="./busca.xhtml">  
-	                <h:outputText value="Busca" styleClass="topbusca"/>
-	            </a>
+                <h:form styleClass="toplogout">
+                    <p:inputText id="username" value="#{userController.searchQuery}" required="true">
+                        <f:validateLength minimum="3"/>
+                    </p:inputText>
+                    <p:commandLink id="searchLink" actionListener="#{userController.search()}">
+                        <h:outputText styleClass="toplogout" value="#{languageController.currentLanguage.search}"/>
+                    </p:commandLink>
+                </h:form>
                     
                 </div>
                 <h:form styleClass="toplogout">
                     <p:selectOneMenu id="language" styleClass="toplinguagem" value="#{languageController.currentLanguage.languageName}"
-                        onclick="submit();">
-                        <p:ajax listener="#{languageController.changeLanguage()}"/>
+                        actionListener="#{languageController.changeLanguage()}">
                         <f:selectItems value="#{languageController.languages}"/>
                     </p:selectOneMenu>
                 </h:form>

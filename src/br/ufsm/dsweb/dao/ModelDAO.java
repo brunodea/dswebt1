@@ -52,6 +52,21 @@ public abstract class ModelDAO<T extends Model> {
 		}
 		return list;
 	}
+	public ArrayList<T> getAll() {
+		ArrayList<T> list = new ArrayList<T>();
+		for(String csv : DBCore.getAllRows(getFilename())) {
+			try {
+				T model = (T)mModel.getClass().newInstance();
+				model.fromCSV(csv);
+				list.add(model);
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;		
+	}
 	
 	public String getFilename() {
 		return mFilename;

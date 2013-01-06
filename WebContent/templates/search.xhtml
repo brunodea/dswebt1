@@ -1,0 +1,37 @@
+<ui:composition template="./main.xhtml" 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <f:metadata>
+        <f:viewParam name="query" value="#{userController.searchQuery}" />
+    </f:metadata>
+
+<ui:define name="center_content">
+    <p:carousel id="followers" value="#{userController.searchUsers}" var="usr" itemStyleClass="">  
+        <f:facet name="header">
+           <h:outputText value="#{languageController.currentLanguage.results}"/>
+        </f:facet>  
+        <p:panelGrid styleClass="panelgrid_borderless">
+           <p:row>
+               <p:column>
+                   <p:graphicImage value="#{usr.imagePath}"/>
+               </p:column>
+           </p:row>
+           <p:row>
+               <p:column>
+                   <a href="./profile.xhtml?username=#{usr.username}">
+                       <h:outputText value="#{usr.username}"/>
+                   </a>
+               </p:column>
+           </p:row>
+        </p:panelGrid>
+        <f:facet name="footer">  
+            <h:outputText value="#{fn:length(userController.searchUsers)} #{languageController.currentLanguage.results}."/>
+        </f:facet>  
+    </p:carousel>
+</ui:define>
+</ui:composition>

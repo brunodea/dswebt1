@@ -23,7 +23,8 @@ import br.ufsm.dsweb.model.User;
 @SessionScoped
 public class UserController implements Serializable {
 	private User mDumbUser; //usuário que não está no BD.
-
+	private String mSearchQuery;
+	
 	public UserController() {
 		mDumbUser = new User();
 	}
@@ -143,6 +144,12 @@ public class UserController implements Serializable {
 	public User getDumbUser() {
 		return mDumbUser;
 	}
+	public String getSearchQuery() {
+		return mSearchQuery;
+	}
+	public void setSearchQuery(String query) {
+		mSearchQuery = query;
+	}
 	
 	public boolean isLogged() {
 		return FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("user");
@@ -155,5 +162,42 @@ public class UserController implements Serializable {
 	}
 	public List<User> getCurrentUserFollowing() {
 		return new FollowsDAO().getFollowing(getCurrentUser());
+	}
+	
+	private boolean containsSimilar(String[] list, String value) {
+		for(int i = 0; i < list.length; i++) {
+			String word = list[i].trim();
+			if(value.indexOf(word) > -1) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void search() {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("search.xhtml?query="+getSearchQuery());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+	}
+	public List<User> getSearchUsers() {
+		setSearchQuery(getSearchQuery().trim());
+		String[] words = getSearchQuery().split(" ");
+		ArrayList<User> res = new ArrayList<User>();
+		for(User user : new UserDAO().getAll()) {
+			if(containsSimilar(words, user.getUsername())) {
+				res.add(user);
+			} else {
+				for(int i = 0; i < words.length; i++) {
+					if(containsSimilar(user.getFullname().split(" "), words[i])) {
+						res.add(user);
+						break;
+					}
+				}
+			}
+		}
+		
+		return res;
 	}
 }

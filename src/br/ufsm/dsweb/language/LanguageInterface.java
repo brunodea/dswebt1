@@ -27,6 +27,8 @@ public interface LanguageInterface {
 	public String getRetweet();
 	public String getRetweets();
 	public String getCharactersRemaining();
+	public String getResults();
+	public String getSearch();
 	
 	public String getUserDoesntExist();
 	public String getSuccess();

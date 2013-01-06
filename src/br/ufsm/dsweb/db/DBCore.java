@@ -188,6 +188,20 @@ public class DBCore {
 		
 		return res;
 	}
+	public static synchronized ArrayList<String> getAllRows(String filename) {
+		final ArrayList<String> res = new ArrayList<String>();
+
+		readFile(filename, new RowReader() {
+			@Override
+			public boolean doSomething(String row, boolean has_next) {
+				res.add(row);
+				
+				return true;
+			}
+		});
+		
+		return res;		
+	}
 	
 	public static synchronized String getLastRow(String filename) {
 		return readFile(filename, new RowReader() {			
