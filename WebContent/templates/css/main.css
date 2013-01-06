@@ -4,3 +4,13 @@
 	border: none;
 
 }
+
+
+
+.ui-selectonemenu {
+font-size: 70% !important;
+alignment-adjust: central;
+position: relative;
+top: 10px;
+left: 100px;
+}
