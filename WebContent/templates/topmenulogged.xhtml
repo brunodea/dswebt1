@@ -16,7 +16,8 @@
 	            </a>
                 </div>
                 <h:form styleClass="toplogout">
-                    <p:selectOneMenu id="language" value="#{languageController.currentLanguage.languageName}">
+                    <p:selectOneMenu id="language" value="#{languageController.currentLanguage.languageName}"
+                        onclick="submit();">
                         <p:ajax listener="#{languageController.changeLanguage()}"/>
                         <f:selectItems value="#{languageController.languages}"/>
                     </p:selectOneMenu>
