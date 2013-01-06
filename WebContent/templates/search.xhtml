@@ -9,13 +9,15 @@
     <f:metadata>
         <f:viewParam name="query" value="#{userController.searchQuery}" />
     </f:metadata>
+    
 
 <ui:define name="center_content">
-    <p:carousel id="followers" value="#{userController.searchUsers}" var="usr" itemStyleClass="">  
+    <div class="grid_3 prefix_4 suffix_5 searchposition" >
+    <p:carousel id="followers" value="#{userController.searchUsers}" var="usr" itemStyleClass="search">  
         <f:facet name="header">
            <h:outputText value="#{languageController.currentLanguage.results}"/>
         </f:facet>  
-        <p:panelGrid styleClass="panelgrid_borderless">
+        <p:panelGrid styleClass="panelgrid_borderless search" >
            <p:row>
                <p:column>
                    <p:graphicImage value="#{usr.imagePath}"/>
@@ -33,5 +35,6 @@
             <h:outputText value="#{fn:length(userController.searchUsers)} #{languageController.currentLanguage.results}."/>
         </f:facet>  
     </p:carousel>
+</div>
 </ui:define>
 </ui:composition>

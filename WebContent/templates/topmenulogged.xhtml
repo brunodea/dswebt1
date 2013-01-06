@@ -10,32 +10,44 @@
                 <div class="topmenuh">                 
 	            <a href="./profile.xhtml?username=#{userController.loggedUser.username}">  
                         <h:outputText  styleClass="topnick" value="#{userController.loggedUser.fullname}"/>
-	            </a>       
+	            </a>   
+                </div>
+                <div class="topmenuh">
 	            <a href="./editprofile.xhtml">  
 	                <h:outputText value="#{languageController.currentLanguage.editProfile}" styleClass="topedit"/>
 	            </a>
+                </div>
+                <div class="topmenuh">
+                    <h:form styleClass="toplogout">
+                        <p:commandLink id="logoutlink" actionListener="#{userController.logout}">
+                            <h:outputText styleClass="toplogout" value="#{languageController.currentLanguage.logout}"/>
+                        </p:commandLink>
+                    </h:form>
+                </div>
+            
+                <div class="topmenuh">
                 <h:form styleClass="toplogout">
-                    <p:inputText id="username" value="#{userController.searchQuery}" required="true">
+                    <p:inputText id="username" value="#{userController.searchQuery}" required="true" styleClass="topbuscacaixa">
                         <f:validateLength minimum="3"/>
                     </p:inputText>
-                    <p:commandLink id="searchLink" actionListener="#{userController.search()}">
-                        <h:outputText styleClass="toplogout" value="#{languageController.currentLanguage.search}"/>
-                    </p:commandLink>
-                </h:form>
                     
+                    <p:commandLink id="searchLink" actionListener="#{userController.search()}">
+                        <h:outputText styleClass="topbusca" value="#{languageController.currentLanguage.search}"/>
+                    </p:commandLink>
+                </h:form>                    
                 </div>
-                <h:form styleClass="toplogout">
+            
+                <div class="topmenuh">
+                <h:form styleClass="toplogoutt">
                     <p:selectOneMenu id="language" styleClass="toplinguagem" value="#{languageController.languageName}"
                         onchange="window.location.replace(window.location.href);">
                         <p:ajax action="change" listener="#{languageController.changeLanguage()}"/>
                         <f:selectItems value="#{languageController.languages}"/>
                     </p:selectOneMenu>
                 </h:form>
-                <h:form styleClass="toplogout">
-                    <p:commandLink id="logoutlink" actionListener="#{userController.logout}">
-                        <h:outputText styleClass="toplogout" value="#{languageController.currentLanguage.logout}"/>
-                    </p:commandLink>
-		        </h:form>
+                </div>
+                
+                
         </div>
     </div>
     <div class="clear"/>
