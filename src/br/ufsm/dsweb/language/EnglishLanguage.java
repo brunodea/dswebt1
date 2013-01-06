@@ -170,4 +170,9 @@ public class EnglishLanguage implements LanguageInterface {
 	public String getSearch() {
 		return "Search";
 	}
+
+	@Override
+	public String getChangeLanguage() {
+		return "Change";
+	}
 }

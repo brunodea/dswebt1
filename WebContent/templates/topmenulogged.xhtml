@@ -25,8 +25,9 @@
                     
                 </div>
                 <h:form styleClass="toplogout">
-                    <p:selectOneMenu id="language" styleClass="toplinguagem" value="#{languageController.currentLanguage.languageName}"
-                        actionListener="#{languageController.changeLanguage()}">
+                    <p:selectOneMenu id="language" styleClass="toplinguagem" value="#{languageController.languageName}"
+                        onchange="window.location.replace(window.location.href);">
+                        <p:ajax action="change" listener="#{languageController.changeLanguage()}"/>
                         <f:selectItems value="#{languageController.languages}"/>
                     </p:selectOneMenu>
                 </h:form>

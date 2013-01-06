@@ -166,4 +166,9 @@ public class PortugueseLanguage implements LanguageInterface {
 	public String getSearch() {
 		return "Buscar";
 	}
+
+	@Override
+	public String getChangeLanguage() {
+		return "Alterar";
+	}
 }

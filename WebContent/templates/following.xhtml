@@ -25,7 +25,8 @@
            </p:row>
         </p:panelGrid>
         <f:facet name="footer">
-            <h:outputText value="Following #{fn:length(userController.currentUserFollowing)} #{languageController.currentLanguage.users}."/>
+            <h:outputText value="#{languageController.currentLanguage.following} #{fn:length(userController.currentUserFollowing)} 
+                #{languageController.currentLanguage.users}."/>
         </f:facet>  
     </p:carousel>
 </ui:composition>

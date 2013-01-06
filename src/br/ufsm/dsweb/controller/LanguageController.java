@@ -1,10 +1,12 @@
 package br.ufsm.dsweb.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import br.ufsm.dsweb.language.EnglishLanguage;
 import br.ufsm.dsweb.language.LanguageInterface;
@@ -42,6 +44,12 @@ public class LanguageController implements Serializable {
 			mCurrentLanguage = new EnglishLanguage();
 		} else if(mLanguageName.equals(new PortugueseLanguage().getLanguageName())) {
 			mCurrentLanguage = new PortugueseLanguage();
+		}
+		
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("#");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

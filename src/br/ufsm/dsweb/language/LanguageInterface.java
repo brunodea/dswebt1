@@ -29,7 +29,7 @@ public interface LanguageInterface {
 	public String getCharactersRemaining();
 	public String getResults();
 	public String getSearch();
-	
+	public String getChangeLanguage();	
 	public String getUserDoesntExist();
 	public String getSuccess();
 	public String getSuccessTweet();
