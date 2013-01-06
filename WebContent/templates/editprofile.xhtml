@@ -10,39 +10,30 @@
             <h:form styleClass="editpainel">
 			    <p:panel id="editpanel" header="#{languageController.currentLanguage.editProfile}">
                                 <p:panelGrid id="editgrid" styleClass="panelgrid_borderless">
-			            <p:row>
+			           <p:row>
 			                <p:column>
-			                    <h:outputLabel for="edit_fullname" styleClass="" value="#{languageController.currentLanguage.fullName}"/>
+			                    <h:outputLabel for="edit_fullname" value="#{languageController.currentLanguage.fullName}"/>
 			                </p:column>
 			                <p:column>
-			                    <p:inputText id="edit_fullname"  value="#{userController.loggedUser.fullname}" required="true">
+			                    <p:inputText id="edit_fullname"  value="#{userController.dumbUser.fullname}" required="true">
 			                        <f:validateLength minimum="6"/>
 			                    </p:inputText>
 			                </p:column>
 			            </p:row>
 		                <p:row>
 		                    <p:column>
-		                        <h:outputLabel for="edit_username" styleClass="" value="#{languageController.currentLanguage.username}"/>
+		                        <h:outputLabel for="edit_password" value="#{languageController.currentLanguage.password}"/>
 		                    </p:column>
 		                    <p:column>
-		                        <p:inputText id="edit_username"  value="#{userController.loggedUser.username}" required="true">
+		                        <p:inputText id="edit_password"  value="#{userController.dumbUser.password}" required="true">
 		                            <f:validateLength minimum="6"/>
 		                        </p:inputText>
 		                    </p:column>
-		                </p:row>
+		                </p:row> 
 		                <p:row>
 		                    <p:column>
-		                        <h:outputLabel for="edit_password" styleClass="" value="#{languageController.currentLanguage.password}"/>
-		                    </p:column>
-		                    <p:column>
-		                        <p:inputText id="edit_password"  value="#{userController.loggedUser.password}" required="true">
-		                            <f:validateLength minimum="6"/>
-		                        </p:inputText>
-		                    </p:column>
-		                </p:row>
-		                <p:row>
-		                    <p:column colspan="2">
-			                    <p:commandButton id="doneButton" value="#{languageController.currentLanguage.done}" update="editpanel" action="#{userController.editProfile()}"/>
+			                    <p:commandButton id="doneButton" value="#{languageController.currentLanguage.done}"
+			                        action="#{userController.editprofile()}"/>
 		                    </p:column>
 		                </p:row>
 			        </p:panelGrid>

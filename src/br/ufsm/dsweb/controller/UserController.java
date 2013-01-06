@@ -69,23 +69,18 @@ public class UserController implements Serializable {
 			}
 		}
 	}
-	public void editProfile() {
+	public void editprofile() {
 		UserDAO udao = new UserDAO();
-		FacesMessage message = null;
-		User curr = getCurrentUser();
-		if(udao.usernameExists(curr.getUsername())) {
-			message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalida username", "Username already taken.");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-		} else {
-			message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success!", "Changes made with success.");
-			udao.update(curr);
-			try {
-				FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml?username="+curr.getUsername());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		User curr = mDumbUser;
+		mDumbUser.setID(getCurrentUser().getID());
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success!", "Changes made with success.");
 		FacesContext.getCurrentInstance().addMessage(null, message);
+		udao.update(curr);
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml?username="+curr.getUsername());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public List<Tweet> getTimeline() {
