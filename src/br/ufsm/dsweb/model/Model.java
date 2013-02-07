@@ -2,7 +2,17 @@ package br.ufsm.dsweb.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class Model implements Serializable {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id", nullable=false)
 	private int mId;
 
 	public Model() {

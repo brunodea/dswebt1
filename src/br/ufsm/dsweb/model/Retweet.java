@@ -1,12 +1,24 @@
 package br.ufsm.dsweb.model;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import br.ufsm.dsweb.dao.TweetDAO;
 import br.ufsm.dsweb.dao.UserDAO;
 import br.ufsm.dsweb.db.DBCore;
 
+@Entity
+@Table(name="retweet")
 public class Retweet extends Model {
 
+	@ManyToOne
+	@JoinColumn(name="user_id")
 	private User mUser;
+	@ManyToOne
+	@JoinColumn(name="tweet_id")
 	private Tweet mTweet;
 	
 	public Tweet getTweet() {

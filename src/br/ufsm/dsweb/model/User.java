@@ -2,12 +2,22 @@ package br.ufsm.dsweb.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import br.ufsm.dsweb.db.DBCore;
 
+@Entity
+@Table(name="user")
 public class User extends Model implements Serializable {
+	@Column(name="full_name", nullable=false)
 	private String mFullName;
+	@Column(name="username", nullable=false)
 	private String mUsername;
+	@Column(name="password", nullable=false)
 	private String mPassword;
+	@Column(name="image_path", nullable=true)
 	private String mImagePath;
 	
 	public User() {
