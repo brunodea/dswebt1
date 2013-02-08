@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import br.ufsm.dsweb.db.DBCore;
 import br.ufsm.dsweb.model.Tweet;
 import br.ufsm.dsweb.model.User;
 

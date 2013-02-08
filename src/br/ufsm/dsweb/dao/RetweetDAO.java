@@ -8,12 +8,12 @@ import br.ufsm.dsweb.model.User;
 
 public class RetweetDAO extends ModelDAO<Retweet> {
 	public RetweetDAO() {
-		super(new Retweet(), "retweets.csv");
+		super(Retweet.class, "retweet");
 	}
 	
 	public ArrayList<Tweet> getRetweetsOf(User user) {
 		ArrayList<Tweet> retweets = new ArrayList<Tweet>();
-		for(Retweet rt : getAllByCol(0, user.getID()+"")) {
+		for(Retweet rt : getAllByCol("user_id", user.getID())) {
 			retweets.add(rt.getTweet());
 		}
 		return retweets;
@@ -21,7 +21,7 @@ public class RetweetDAO extends ModelDAO<Retweet> {
 	
 	public ArrayList<User> getRetweeters(Tweet tweet) {
 		ArrayList<User> users = new ArrayList<User>();
-		for(Retweet rt : getAllByCol(1, tweet.getID()+"")) {
+		for(Retweet rt : getAllByCol("tweet_id", tweet.getID())) {
 			users.add(rt.getUser());
 		}
 		return users;
