@@ -37,7 +37,7 @@ public class TweetController implements Serializable {
 	
 	public boolean isTweetFromUser(Tweet tweet, User user) {
 		boolean yes = false;
-		for(Tweet twt : new TweetDAO().getAllByCol(1, user.getID()+"")) {
+		for(Tweet twt : new TweetDAO().getAllByCol("user_id", user.getID()+"")) {
 			if(twt.getID() == tweet.getID()) {
 				yes = true;
 				break;
@@ -79,9 +79,9 @@ public class TweetController implements Serializable {
 		if(!isRetweetFromUser(tweet, user)) {
 			new RetweetDAO().save(rt);
 		} else {
-			HashMap<Integer, String> col_vals = new HashMap<Integer, String>();
-			col_vals.put(0, user.getID()+"");
-			col_vals.put(1, tweet.getID()+"");
+			HashMap<String, String> col_vals = new HashMap<String, String>();
+			col_vals.put("user_id", user.getID()+"");
+			col_vals.put("tweet_id", tweet.getID()+"");
 			new RetweetDAO().removeByCols(col_vals);
 		}
 	}
