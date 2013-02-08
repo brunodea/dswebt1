@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import br.ufsm.dsweb.db.DBCore;
-
 @Entity
 @Table(name="user")
 public class User extends Model implements Serializable {
@@ -54,23 +52,5 @@ public class User extends Model implements Serializable {
 	
 	public void setImagePath(String imagepath) {
 		mImagePath = imagepath;
-	}
-
-	@Override
-	public String toCSV() {
-		return getID()+DBCore.SEPARATOR+getFullname()+DBCore.SEPARATOR+getUsername()+
-				DBCore.SEPARATOR+getPassword()+DBCore.SEPARATOR+getImagePath();
-	}
-
-	@Override
-	public void fromCSV(String csv) {
-		String[] vals = csv.split(DBCore.SEPARATOR);
-		setID(Integer.parseInt(vals[0]));
-		setFullname(vals[1]);
-		setUsername(vals[2]);
-		setPassword(vals[3]);
-		if(vals.length > 4) {
-			setImagePath(vals[4]);
-		}
 	}
 }

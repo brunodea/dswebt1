@@ -42,6 +42,4 @@ public abstract class Model implements Serializable {
         Model obj2 = (Model) obj;
         return this.getID() == obj2.getID();
     }
-	public abstract String toCSV();
-	public abstract void fromCSV(String csv);
 }

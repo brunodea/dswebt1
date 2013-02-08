@@ -9,10 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import br.ufsm.dsweb.dao.UserDAO;
-import br.ufsm.dsweb.db.DBCore;
-import br.ufsm.dsweb.util.Util;
-
 @Entity
 @Table(name="tweet")
 public class Tweet extends Model implements Serializable {
@@ -48,20 +44,5 @@ public class Tweet extends Model implements Serializable {
 
 	public void setContent(String content) {
 		this.mContent = content;
-	}
-
-	@Override
-	public String toCSV() {
-		return getID()+DBCore.SEPARATOR+getUser().getID()+DBCore.SEPARATOR+
-				Util.dateToString(getPubdate())+DBCore.SEPARATOR+getContent();
-	}
-
-	@Override
-	public void fromCSV(String csv) {
-		String[] vals = csv.split(DBCore.SEPARATOR);
-		setID(Integer.parseInt(vals[0]));
-		setUser(new UserDAO().getByID(Integer.parseInt(vals[1])));
-		setPubdate(Util.stringToDate(vals[2]));
-		setContent(vals[3]);
 	}
 }
