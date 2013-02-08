@@ -50,6 +50,9 @@ public abstract class ModelDAO<T extends Model> {
 		}
 		return res;
 	}
+	public T getFirstByCol(String col, int value) {
+		return getFirstByCol(col, value+"");
+	}
 	public void save(T model) {
 		try {
 			getEntityManager().persist(model);
@@ -104,6 +107,9 @@ public abstract class ModelDAO<T extends Model> {
 		}
 		return res;
 	}
+	public List<T> getAllByCol(String col, int value) {
+		return getAllByCol(col, value+"");
+	}
 	@SuppressWarnings("unchecked")
 	public List<T> getAll() {
 		List<T> res = new ArrayList<T>();
@@ -115,7 +121,7 @@ public abstract class ModelDAO<T extends Model> {
 		}
 		return res;
 	}
-	
+
 	public String getTableName() {
 		return mTableName;
 	}
