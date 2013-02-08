@@ -1,5 +1,6 @@
 package br.ufsm.dsweb.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,22 +28,36 @@ public abstract class ModelDAO<T extends Model> {
 		return mEntityManager;
 	}
 
-	@SuppressWarnings("unchecked")
 	public T getByID(int model_id) {
+		return getFirstByCol("id", model_id+"");
+	}
+	@SuppressWarnings("unchecked")
+	public T getFirstByCol(String col, String value) {
 		T res = null;
 		try {
-			res = (T) getEntityManager().find(mModel.getClass(), model_id);
+		 res = (T) getEntityManager().createQuery("SELECT m FROM " +getTableName()+" m WHERE m."+col+" = :"+col)
+				 .setParameter(col, value)
+				 .getSingleResult();
 		} catch(Exception e) {
+			e.printStackTrace();
 		}
 		return res;
 	}
 	public void save(T model) {
-		getEntityManager().persist(model);
+		try {
+			getEntityManager().persist(model);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	public void removeByID(int model_id) {
 		T model = getByID(model_id);
 		if(model != null) {
-			getEntityManager().remove(model);
+			try {
+				getEntityManager().remove(model);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	@SuppressWarnings("unchecked")
@@ -55,23 +70,43 @@ public abstract class ModelDAO<T extends Model> {
 		for(String col : col_vals.keySet()) {
 			q.setParameter(col, col_vals.get(col));
 		}
-		for(T model : (List<T>) q.getResultList()) {
-			getEntityManager().remove(model);
+		try {
+			for(T model : (List<T>) q.getResultList()) {
+				getEntityManager().remove(model);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	public void update(T model) {
-		getEntityManager().merge(model);
+		try {
+			getEntityManager().merge(model);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	@SuppressWarnings("unchecked")
 	public List<T> getAllByCol(String col, String value) {
-		return (List<T>) getEntityManager().createQuery("SELECT m FROM " +getTableName()+ " m WHERE m."+col+" = :"+col)
+		List<T> res = new ArrayList<T>();
+		try {
+		res = (List<T>) getEntityManager().createQuery("SELECT m FROM " +getTableName()+ " m WHERE m."+col+" = :"+col)
 				.setParameter(col, value)
 				.getResultList();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return res;
 	}
 	@SuppressWarnings("unchecked")
 	public List<T> getAll() {
-		return (List<T>) getEntityManager().createQuery("SELECE m FROM " +getTableName())
-				.getResultList();
+		List<T> res = new ArrayList<T>();
+		try {
+			res = (List<T>) getEntityManager().createQuery("SELECE m FROM " +getTableName())
+					.getResultList();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return res;
 	}
 	
 	public String getTableName() {
