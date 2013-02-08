@@ -13,14 +13,14 @@ import br.ufsm.dsweb.model.Model;
 
 @Stateless
 public abstract class ModelDAO<T extends Model> {
-	private T mModel;
+	private Class<T> mClass;
 	private String mTableName;
 	
 	@PersistenceContext(unitName="entitymanagertwitcher")
 	private EntityManager mEntityManager;
 
-	public ModelDAO(T model, String tablename) {
-		mModel = model;
+	public ModelDAO(Class<T> classT, String tablename) {
+		mClass = classT;
 		mTableName = tablename;
 	}
 	
@@ -29,7 +29,14 @@ public abstract class ModelDAO<T extends Model> {
 	}
 
 	public T getByID(int model_id) {
-		return getFirstByCol("id", model_id+"");
+		T res = null;
+		try {
+			res = getEntityManager().find(mClass, model_id);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 	@SuppressWarnings("unchecked")
 	public T getFirstByCol(String col, String value) {
