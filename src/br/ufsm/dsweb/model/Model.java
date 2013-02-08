@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 
 @MappedSuperclass
 public abstract class Model implements Serializable {
@@ -14,6 +15,10 @@ public abstract class Model implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id", nullable=false)
 	private int mId;
+	
+	@Version
+	@Column(name="version")
+	private int version;
 
 	public Model() {
 		this.mId = -1;
