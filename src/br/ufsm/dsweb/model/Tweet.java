@@ -25,7 +25,7 @@ public class Tweet extends Model implements Serializable {
 	private Date mPubDate;
 	@Column(name="content", nullable=false)
 	private String mContent;
-		
+			
 	public User getUser() {
 		return mUser;
 	}
