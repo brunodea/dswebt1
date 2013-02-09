@@ -12,7 +12,7 @@ import javax.persistence.Version;
 @MappedSuperclass
 public abstract class Model implements Serializable {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id", nullable=false)
 	private int mId;
 	

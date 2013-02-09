@@ -4,24 +4,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import br.ufsm.dsweb.model.Model;
 
-@Stateless
 public abstract class ModelDAO<T extends Model> {
 	private Class<T> mClass;
 	private String mTableName;
 	
-	@PersistenceContext(unitName="entitymanagertwitcher")
+	private static EntityManagerFactory mEMF = null;
 	private EntityManager mEntityManager;
 
 	public ModelDAO(Class<T> classT, String tablename) {
 		mClass = classT;
 		mTableName = tablename;
+		if(mEMF == null) {
+			 mEMF = Persistence.createEntityManagerFactory("twitcherPersistence");
+		}
+		mEntityManager = mEMF.createEntityManager();
 	}
 	
 	public EntityManager getEntityManager() {
