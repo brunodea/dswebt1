@@ -10,10 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import br.ufsm.dsweb.dao.FollowsDAO;
-import br.ufsm.dsweb.dao.RetweetDAO;
 import br.ufsm.dsweb.dao.TweetDAO;
-import br.ufsm.dsweb.model.Retweet;
 import br.ufsm.dsweb.model.Tweet;
 import br.ufsm.dsweb.model.User;
 
@@ -48,18 +45,18 @@ public class TweetController implements Serializable {
 	
 	public boolean isRetweetFromUser(Tweet tweet, User user) {
 		boolean is_rt = false;
-		for(Tweet twt : new RetweetDAO().getRetweetsOf(user)) {
+		/*for(Tweet twt : new RetweetDAO().getRetweetsOf(user)) {
 			if(twt.getID() == tweet.getID()) {
 				is_rt = true;
 				break;
 			}
-		}
+		}*/
 		return is_rt;
 	}
 	
 	public boolean isRetweet(Tweet tweet, User user) {
 		boolean is_rt = true;
-		if(!isTweetFromUser(tweet, user)) {
+		/*if(!isTweetFromUser(tweet, user)) {
 			for(User followed : new FollowsDAO().getFollowing(user)) {
 				if(isTweetFromUser(tweet, followed)) {
 					is_rt = false;
@@ -68,12 +65,12 @@ public class TweetController implements Serializable {
 			}
 		} else {
 			is_rt = false;
-		}
+		}*/
 		return is_rt;		
 	}
 
 	public void toggleRetweet(Tweet tweet, User user) {
-		Retweet rt = new Retweet();
+		/*Retweet rt = new Retweet();
 		rt.setUser(user);
 		rt.setTweet(tweet);
 		if(!isRetweetFromUser(tweet, user)) {
@@ -83,15 +80,17 @@ public class TweetController implements Serializable {
 			col_vals.put("user_id", user.getID()+"");
 			col_vals.put("tweet_id", tweet.getID()+"");
 			new RetweetDAO().removeByCols(col_vals);
-		}
+		}*/
 	}
 	
 	public ArrayList<User> getRetweetersOf(Tweet tweet) {
-		return new RetweetDAO().getRetweeters(tweet);
+		return new ArrayList<User>();
+		//return new RetweetDAO().getRetweeters(tweet);
 	}
 	
 	public int numRetweets(Tweet tweet) {
-		return new RetweetDAO().getRetweeters(tweet).size();
+		return 0;
+		//return new RetweetDAO().getRetweeters(tweet).size();
 	}
 	
 	public Tweet getTweet() {

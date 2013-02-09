@@ -16,18 +16,38 @@ public abstract class ModelDAO<T extends Model> {
 	private String mTableName;
 	
 	private static EntityManagerFactory mEMF = null;
-	private EntityManager mEntityManager;
 
+//	@PersistenceContext(unitName="twitcherPersistence")
+	private EntityManager mEntityManager = null;
+	
 	public ModelDAO(Class<T> classT, String tablename) {
 		mClass = classT;
 		mTableName = tablename;
-		if(mEMF == null) {
-			 mEMF = Persistence.createEntityManagerFactory("twitcherPersistence");
-		}
-		mEntityManager = mEMF.createEntityManager();
 	}
 	
 	public EntityManager getEntityManager() {
+		if(mEMF == null) {
+			mEMF = Persistence.createEntityManagerFactory("twitcherPersistence");
+		}
+		if(mEntityManager == null) {
+			mEntityManager = mEMF.createEntityManager();
+		}
+/*		if(mEMF == null) {
+			System.out.println("\n\nBEFORE\n\n");
+			mEMF = Persistence.createEntityManagerFactory("twitcherPersistence");
+			System.out.println("\n\nAFTER\n\n");
+			if(mEMF == null) {
+				System.out.println("\n\nmEMF É NULL\n\n");
+			} else {
+				System.out.println("\n\nmEMF NÃO É NULL\n\n");
+			}
+		}
+		EntityManager em = mEMF.createEntityManager();
+		if(em == null) {
+			System.out.println("\n\nÉ NULL\n\n");
+		} else {
+			System.out.println("\n\nNÃO É NULL\n\n");
+		}*/
 		return mEntityManager;
 	}
 
