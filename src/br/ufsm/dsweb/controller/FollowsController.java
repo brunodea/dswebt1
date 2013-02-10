@@ -15,24 +15,20 @@ import br.ufsm.dsweb.model.User;
 @ViewScoped
 public class FollowsController implements Serializable {
 	public void startFollowing(User follower, User followed) {
-		/*if(!isFollowing(follower, followed)) {
-			Follows follows = new Follows();
-			follows.setFollower(follower);
-			follows.setFollowed(followed);
-			
-			new FollowsDAO().save(follows);
-		}*/
+		if(!isFollowing(follower, followed)) {
+			new UserDAO().follow(follower, followed);
+		}
 	}
 	public void unfollow(User follower, User followed) {
-		//new FollowsDAO().unfollow(follower, followed);
+		new UserDAO().unfollow(follower, followed);
 	}
 	
 	public void toggleFollow(User follower, User followed) {
-		/*if(isFollowing(follower, followed)) {
+		if(isFollowing(follower, followed)) {
 			unfollow(follower, followed);
 		} else {
 			startFollowing(follower, followed);
-		}*/
+		}
 	}
 
 	public boolean isFollowing(User follower, User followed) {

@@ -3,6 +3,9 @@ package br.ufsm.dsweb.controller;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -80,12 +83,12 @@ public class UserController implements Serializable {
 	
 	public List<Tweet> getTimeline() {
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
-		/*for(User user : getCurrentUserFollowing()) {
+		for(User user : getCurrentUserFollowing()) {
 			tweets.addAll(new UserDAO().getAllTweets(user));
-			tweets.addAll(new RetweetDAO().getRetweetsOf(user));
+			tweets.addAll(new UserDAO().retweets(user));
 		}
 		tweets.addAll(new UserDAO().getAllTweets(getCurrentUser()));
-		tweets.addAll(new RetweetDAO().getRetweetsOf(getCurrentUser()));
+		tweets.addAll(new UserDAO().retweets(getCurrentUser()));
 				
 		Iterator<Tweet> it = tweets.iterator();
 		while(it.hasNext()) {
@@ -107,7 +110,7 @@ public class UserController implements Serializable {
 			public int compare(Tweet lhs, Tweet rhs) {
 				return rhs.getPubdate().compareTo(lhs.getPubdate());
 			}
-		});*/
+		});
 		return tweets;
 	}
 	
@@ -148,12 +151,10 @@ public class UserController implements Serializable {
 		return isLogged();
 	}
 	public List<User> getCurrentUserFollowers() {
-		return new ArrayList<User>();
-		//return new FollowsDAO().getFollowers(getCurrentUser());
+		return new UserDAO().followers(getCurrentUser());
 	}
 	public List<User> getCurrentUserFollowing() {
-		return new ArrayList<User>();
-		//return new FollowsDAO().getFollowing(getCurrentUser());
+		return new UserDAO().following(getCurrentUser());
 	}
 	
 	private boolean containsSimilar(String[] list, String value) {

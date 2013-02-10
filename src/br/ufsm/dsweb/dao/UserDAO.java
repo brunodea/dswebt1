@@ -1,5 +1,6 @@
 package br.ufsm.dsweb.dao;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -30,7 +31,7 @@ public class UserDAO extends ModelDAO<User> {
 	}
 	
 	public List<Tweet> getAllTweets(User user) {
-		List<Tweet> tweets = new TweetDAO().getAllByCol("user_id", user.getID());		
+		List<Tweet> tweets = new TweetDAO().getAllByCol("mUser.mId", user.getID());		
 		Collections.sort(tweets, new Comparator<Tweet>() {
 			@Override
 			public int compare(Tweet lhs, Tweet rhs) {
@@ -43,57 +44,84 @@ public class UserDAO extends ModelDAO<User> {
 
 	@SuppressWarnings("unchecked")
 	public List<User> following(User follower) {
-		List<User> users = getEntityManager().createQuery(
-				"select u" +
-				" from twitcheruser u" +
-				" join user_follows uf" +
-				"  on u.id = uf.follower_id" +
-				" where u.id = :id")
-				.setParameter("id", follower.getID())
+		List<User> users = new ArrayList<User>();
+		try {
+			users = getEntityManager().createQuery(
+				"select distinct u" +
+				" from User u join u.mFollowing uf" +
+				" join fetch u.mFollowing uf2" +
+				" where uf2.mId = :mId")
+				.setParameter("mId", follower.getID())
 				.getResultList();
-		
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			getEntityManager().close();
+		}
 		follower.setFollowing(users);
 		return users;
 	}
 	@SuppressWarnings("unchecked")
 	public List<User> followers(User followed) {
-		List<User> users = getEntityManager().createQuery(
-				"select u" +
-				" from twitcheruser u" +
-				" join user_follows uf" +
-				"  on u.id = uf.followed_id" +
-				" where u.id = :id")
-				.setParameter("id", followed.getID())
+		List<User> users = new ArrayList<User>();
+		try {
+			users = getEntityManager().createQuery(
+				"select distinct u" +
+				" from User u join u.mFollowers uf" +
+				" join fetch u.mFollowers uf2" +
+				" where uf2.mId = :mId")
+				.setParameter("mId", followed.getID())
 				.getResultList();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			getEntityManager().close();
+		}
 		
 		followed.setFollowers(users);
 		return users;
 	}
 	public boolean isFollowing(User follower, User followed) {
-		boolean following = false;
-		try {
-			int i = (Integer) getEntityManager().createQuery(
-					"select count(uf)" +
-					" from user_follows uf" +
-					" where uf.follower_id = :follower_id" +
-					"  and uf.followed_id = :followed_id")
-					.setParameter("follower_id", follower.getID())
-					.setParameter("followed_id", followed.getID())
-					.getSingleResult();
-			following = i > 0;
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		//follower.getFollowing().contains(followed)
-		return following;
+		return following(follower).contains(followed);
 	}
 	public void follow(User follower, User to_follow) {
-		follower.getFollowing().add(to_follow);
-		getEntityManager().merge(follower);
+		if(!isFollowing(follower, to_follow)) {
+			follower.getFollowing().add(to_follow);
+			try {
+				getEntityManager().getTransaction().begin();
+				getEntityManager().merge(follower);
+				getEntityManager().getTransaction().commit();
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				getEntityManager().close();
+			}
+		}
 	}
 	public void unfollow(User follower, User followed) {
 		if(isFollowing(follower, followed)) {
-			
+			follower.setFollowing(following(follower));
+			follower.getFollowing().remove(followed);			
+			try {
+				getEntityManager().getTransaction().begin();
+				getEntityManager().merge(follower);
+				getEntityManager().getTransaction().commit();
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				getEntityManager().close();
+			}
 		}
+	}
+
+	public ArrayList<Tweet> retweets(User user) {
+		ArrayList<Tweet> rts = new ArrayList<Tweet>();
+		
+		return rts;
+	}
+	public ArrayList<User> retweeters(Tweet tweet) {
+		ArrayList<User> users = new ArrayList<User>();
+		
+		return users;
 	}
 }

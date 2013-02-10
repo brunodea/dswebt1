@@ -17,7 +17,6 @@ public abstract class ModelDAO<T extends Model> {
 	
 	private static EntityManagerFactory mEMF = null;
 
-//	@PersistenceContext(unitName="twitcherPersistence")
 	private EntityManager mEntityManager = null;
 	
 	public ModelDAO(Class<T> classT, String tablename) {
@@ -29,25 +28,9 @@ public abstract class ModelDAO<T extends Model> {
 		if(mEMF == null) {
 			mEMF = Persistence.createEntityManagerFactory("twitcherPersistence");
 		}
-		if(mEntityManager == null) {
+		if(mEntityManager == null || !mEntityManager.isOpen()) {
 			mEntityManager = mEMF.createEntityManager();
 		}
-/*		if(mEMF == null) {
-			System.out.println("\n\nBEFORE\n\n");
-			mEMF = Persistence.createEntityManagerFactory("twitcherPersistence");
-			System.out.println("\n\nAFTER\n\n");
-			if(mEMF == null) {
-				System.out.println("\n\nmEMF É NULL\n\n");
-			} else {
-				System.out.println("\n\nmEMF NÃO É NULL\n\n");
-			}
-		}
-		EntityManager em = mEMF.createEntityManager();
-		if(em == null) {
-			System.out.println("\n\nÉ NULL\n\n");
-		} else {
-			System.out.println("\n\nNÃO É NULL\n\n");
-		}*/
 		return mEntityManager;
 	}
 
@@ -57,8 +40,9 @@ public abstract class ModelDAO<T extends Model> {
 			res = getEntityManager().find(mClass, model_id);
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			getEntityManager().close();
 		}
-		
 		return res;
 	}
 	@SuppressWarnings("unchecked")
@@ -70,6 +54,8 @@ public abstract class ModelDAO<T extends Model> {
 					.getSingleResult();
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			getEntityManager().close();
 		}
 		return res;
 	}
@@ -83,21 +69,29 @@ public abstract class ModelDAO<T extends Model> {
 			res = (T)createQuery(col_vals).getSingleResult();
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			getEntityManager().close();
 		}
 		return res;
 	}
 	public void save(T model) {
 		try {
+			getEntityManager().getTransaction().begin();
 			getEntityManager().persist(model);
+			getEntityManager().getTransaction().commit();
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			getEntityManager().close();
 		}
 	}
 	public void removeByID(int model_id) {
 		T model = getByID(model_id);
 		if(model != null) {
 			try {
+				getEntityManager().getTransaction().begin();
 				getEntityManager().remove(model);
+				getEntityManager().getTransaction().commit();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -106,29 +100,39 @@ public abstract class ModelDAO<T extends Model> {
 	@SuppressWarnings("unchecked")
 	public void removeByCols(HashMap<String,String> col_vals) {
 		try {
+			getEntityManager().getTransaction().begin();
 			for(T model : (List<T>) createQuery(col_vals).getResultList()) {
 				getEntityManager().remove(model);
 			}
+			getEntityManager().getTransaction().commit();
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			getEntityManager().close();
 		}
 	}
 	public void update(T model) {
 		try {
+			getEntityManager().getTransaction().begin();
 			getEntityManager().merge(model);
+			getEntityManager().getTransaction().commit();
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			getEntityManager().close();
 		}
 	}
 	@SuppressWarnings("unchecked")
 	public List<T> getAllByCol(String col, String value) {
 		List<T> res = new ArrayList<T>();
 		try {
-		res = (List<T>) getEntityManager().createQuery("SELECT m FROM " +getTableName()+ " m WHERE m."+col+" = :"+col)
+			res = (List<T>) getEntityManager().createQuery("SELECT m FROM " +getTableName()+ " m WHERE m."+col+" = :"+col)
 				.setParameter(col, value)
 				.getResultList();
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			getEntityManager().close();
 		}
 		return res;
 	}
@@ -142,6 +146,8 @@ public abstract class ModelDAO<T extends Model> {
 			res = (List<T>) createQuery(col_vals).getResultList();
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			getEntityManager().close();
 		}
 		
 		return res;
@@ -154,6 +160,8 @@ public abstract class ModelDAO<T extends Model> {
 					.getResultList();
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			getEntityManager().close();
 		}
 		return res;
 	}
