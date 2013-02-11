@@ -7,16 +7,19 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.Hibernate;
+
 @Entity
 @Table(name="tweet")
 public class Tweet extends Model implements Serializable {
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="user_id", referencedColumnName="id")
 	private User mUser;
 	
@@ -28,7 +31,11 @@ public class Tweet extends Model implements Serializable {
 	private Date mPubDate;
 	@Column(name="content", nullable=false)
 	private String mContent;
-			
+
+	public Tweet() {
+		Hibernate.initialize(mRetweeters);
+	}
+	
 	public User getUser() {
 		return mUser;
 	}

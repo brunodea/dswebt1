@@ -34,7 +34,7 @@ public class TweetController implements Serializable {
 	
 	public boolean isTweetFromUser(Tweet tweet, User user) {
 		boolean yes = false;
-		for(Tweet twt : new TweetDAO().getAllByCol("mUser.mId", user.getID())) {
+		for(Tweet twt : new UserDAO().tweets(user)) {// new TweetDAO().getAllByCol("mUser.mId", user.getID())) {
 			if(twt.getID() == tweet.getID()) {
 				yes = true;
 				break;
@@ -81,7 +81,7 @@ public class TweetController implements Serializable {
 	}
 	
 	public ArrayList<User> getRetweetersOf(Tweet tweet) {
-		return new UserDAO().retweeters(tweet);
+		return new ArrayList<User>(new UserDAO().retweeters(tweet));
 	}
 	
 	public int numRetweets(Tweet tweet) {

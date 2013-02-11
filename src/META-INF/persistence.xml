@@ -10,7 +10,7 @@
         <class>br.ufsm.dsweb.model.User</class>
 
         <properties>
-            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />  
         </properties>
     </persistence-unit>
 </persistence>

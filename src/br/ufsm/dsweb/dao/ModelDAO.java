@@ -25,13 +25,17 @@ public abstract class ModelDAO<T extends Model> {
 	}
 	
 	public EntityManager getEntityManager() {
-		if(mEMF == null) {
+		if(mEMF == null || !mEMF.isOpen()) {
 			mEMF = Persistence.createEntityManagerFactory("twitcherPersistence");
 		}
 		if(mEntityManager == null || !mEntityManager.isOpen()) {
 			mEntityManager = mEMF.createEntityManager();
 		}
 		return mEntityManager;
+	}
+	
+	public static EntityManagerFactory getEntityManagerFactory() {
+		return mEMF;
 	}
 
 	public T getByID(int model_id) {
