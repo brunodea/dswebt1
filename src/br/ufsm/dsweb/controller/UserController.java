@@ -62,6 +62,7 @@ public class UserController implements Serializable {
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("user");
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+				mDumbUser = new User();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
