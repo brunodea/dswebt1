@@ -43,7 +43,7 @@ public class UserDAO extends ModelDAO<User> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<User> following(User follower) {
+	public synchronized List<User> following(User follower) {
 		List<User> users = new ArrayList<User>();
 		try {
 			users = getEntityManager().createQuery(
@@ -62,7 +62,7 @@ public class UserDAO extends ModelDAO<User> {
 		return users;
 	}
 	@SuppressWarnings("unchecked")
-	public List<User> followers(User followed) {
+	public synchronized List<User> followers(User followed) {
 		List<User> users = new ArrayList<User>();
 		try {
 			users = getEntityManager().createQuery(
@@ -84,7 +84,7 @@ public class UserDAO extends ModelDAO<User> {
 	public boolean isFollowing(User follower, User followed) {
 		return following(follower).contains(followed);
 	}
-	public void follow(User follower, User to_follow) {
+	public synchronized void follow(User follower, User to_follow) {
 		if(!isFollowing(follower, to_follow)) {
 			follower.getFollowing().add(to_follow);
 			try {
@@ -98,7 +98,7 @@ public class UserDAO extends ModelDAO<User> {
 			}
 		}
 	}
-	public void unfollow(User follower, User followed) {
+	public synchronized void unfollow(User follower, User followed) {
 		if(isFollowing(follower, followed)) {
 			follower.setFollowing(following(follower));
 			follower.getFollowing().remove(followed);			
@@ -115,7 +115,7 @@ public class UserDAO extends ModelDAO<User> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Tweet> tweets(User user) {
+	public synchronized List<Tweet> tweets(User user) {
 		List<Tweet> tweets = new ArrayList<Tweet>();
 		try {
 			tweets = getEntityManager().createQuery(
@@ -133,7 +133,7 @@ public class UserDAO extends ModelDAO<User> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Tweet> retweets(User user) {
+	public synchronized List<Tweet> retweets(User user) {
 		List<Tweet> tweets = new ArrayList<Tweet>();
 		try {
 			tweets = getEntityManager().createQuery(

@@ -31,7 +31,7 @@ public class User extends Model implements Serializable {
 	@OneToMany(cascade=CascadeType.ALL,orphanRemoval=true,mappedBy="mUser", fetch=FetchType.EAGER)
 	private List<Tweet> mTweets;
 	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="user_retweet", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="tweet_id"))
 	private List<Tweet> mRetweets;
 	
