@@ -158,16 +158,6 @@ public class UserController implements Serializable {
 		return new UserDAO().following(getCurrentUser());
 	}
 	
-	private boolean containsSimilar(String[] list, String value) {
-		for(int i = 0; i < list.length; i++) {
-			String word = list[i].trim();
-			if(value.indexOf(word) > -1) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	public void search() {
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("search.xhtml?query="+getSearchQuery());
@@ -179,17 +169,8 @@ public class UserController implements Serializable {
 		setSearchQuery(getSearchQuery().trim());
 		String[] words = getSearchQuery().split(" ");
 		ArrayList<User> res = new ArrayList<User>();
-		for(User user : new UserDAO().getAll()) {
-			if(containsSimilar(words, user.getUsername())) {
-				res.add(user);
-			} else {
-				for(int i = 0; i < words.length; i++) {
-					if(containsSimilar(user.getFullname().split(" "), words[i])) {
-						res.add(user);
-						break;
-					}
-				}
-			}
+		for(int i = 0; i < words.length; i++) {
+			res.addAll(new UserDAO().usersLike(words[i].trim()));
 		}
 		
 		return res;
