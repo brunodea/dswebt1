@@ -27,6 +27,7 @@ public class TweetController implements Serializable {
 		mTweet.setUser(user);
 		mTweet.setPubdate(new Date());
 		new TweetDAO().save(mTweet);
+		mTweet = new Tweet();
 		
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success!", "Your tweet was successfully save!");
 		FacesContext.getCurrentInstance().addMessage(null, message);
