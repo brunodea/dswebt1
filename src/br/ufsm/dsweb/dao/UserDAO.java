@@ -31,7 +31,7 @@ public class UserDAO extends ModelDAO<User> {
 	}
 	
 	public List<Tweet> getAllTweets(User user) {
-		List<Tweet> tweets = tweets(user);//new TweetDAO().getAllByCol("mUser.mId", user.getID());		
+		List<Tweet> tweets = tweets(user);
 		Collections.sort(tweets, new Comparator<Tweet>() {
 			@Override
 			public int compare(Tweet lhs, Tweet rhs) {
@@ -151,5 +151,44 @@ public class UserDAO extends ModelDAO<User> {
 	}
 	public List<User> retweeters(Tweet tweet) {
 		return new TweetDAO().getRetweeters(tweet);
+	}
+
+	@SuppressWarnings("unchecked")
+	public synchronized List<User> usersLike(String value) {
+		List<User> users = new ArrayList<User>();
+		try {
+			users = getEntityManager().createQuery(
+						"select u" +
+						" from User u" +
+						" where u.mUsername like '%"+value+"%'" +
+						" or u.mFullName like '%"+value+"%'")
+						.getResultList();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			getEntityManager().close();
+		}
+		return users;
+	}
+	
+	public synchronized void retweet(User user, Tweet tweet) {
+		user.getRetweets().add(tweet);
+		update(user);
+	}
+	public synchronized void cancelRetweet(User user, Tweet tweet) {
+		user.getRetweets().remove(tweet);
+		update(user);
+/*		try {
+			getEntityManager().createQuery(
+					"delete from User u" +
+					" join fetch u.Retweets r" +
+					" where r.mId = :mId")
+					.setParameter("mId", tweet.getID())
+					.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			getEntityManager().close();
+		}*/
 	}
 }
