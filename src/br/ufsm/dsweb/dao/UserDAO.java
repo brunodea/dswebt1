@@ -47,9 +47,9 @@ public class UserDAO extends ModelDAO<User> {
 		List<User> users = new ArrayList<User>();
 		try {
 			users = getEntityManager().createQuery(
-				"select distinct u" +
-				" from User u join u.mFollowing uf" +
-				" join fetch u.mFollowing uf2" +
+				"select u" +
+				" from User u" +
+				" join fetch u.mFollowers uf2" +
 				" where uf2.mId = :mId")
 				.setParameter("mId", follower.getID())
 				.getResultList();
@@ -58,7 +58,6 @@ public class UserDAO extends ModelDAO<User> {
 		} finally {
 			getEntityManager().close();
 		}
-		follower.setFollowing(users);
 		return users;
 	}
 	@SuppressWarnings("unchecked")
@@ -66,9 +65,9 @@ public class UserDAO extends ModelDAO<User> {
 		List<User> users = new ArrayList<User>();
 		try {
 			users = getEntityManager().createQuery(
-				"select distinct u" +
-				" from User u join u.mFollowers uf" +
-				" join fetch u.mFollowers uf2" +
+				"select u" +
+				" from User u" +
+				" join fetch u.mFollowing uf2" +
 				" where uf2.mId = :mId")
 				.setParameter("mId", followed.getID())
 				.getResultList();
@@ -77,8 +76,6 @@ public class UserDAO extends ModelDAO<User> {
 		} finally {
 			getEntityManager().close();
 		}
-		
-		followed.setFollowers(users);
 		return users;
 	}
 	public boolean isFollowing(User follower, User followed) {
@@ -86,6 +83,7 @@ public class UserDAO extends ModelDAO<User> {
 	}
 	public synchronized void follow(User follower, User to_follow) {
 		if(!isFollowing(follower, to_follow)) {
+			follower.setFollowing(following(follower));
 			follower.getFollowing().add(to_follow);
 			try {
 				getEntityManager().getTransaction().begin();
@@ -176,6 +174,7 @@ public class UserDAO extends ModelDAO<User> {
 		update(user);
 	}
 	public synchronized void cancelRetweet(User user, Tweet tweet) {
+		user.setRetweets(retweets(user));
 		user.getRetweets().remove(tweet);
 		update(user);
 /*		try {

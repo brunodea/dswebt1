@@ -63,6 +63,7 @@ public class UserController implements Serializable {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 				mDumbUser = new User();
+				mSearchQuery = "";
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

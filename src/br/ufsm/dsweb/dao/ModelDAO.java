@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -115,6 +117,7 @@ public abstract class ModelDAO<T extends Model> {
 			getEntityManager().close();
 		}
 	}
+
 	public synchronized void update(T model) {
 		try {
 			getEntityManager().getTransaction().begin();

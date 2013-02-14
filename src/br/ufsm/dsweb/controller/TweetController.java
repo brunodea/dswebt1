@@ -73,11 +73,9 @@ public class TweetController implements Serializable {
 	public void toggleRetweet(Tweet tweet, User user) {
 		user.setRetweets(new UserDAO().retweets(user));
 		if(!isRetweetFromUser(tweet, user)) {
-			user.getRetweets().add(tweet);
-			new UserDAO().save(user);
+			new UserDAO().retweet(user, tweet);
 		} else {
-			user.getRetweets().remove(tweet);
-			new UserDAO().update(user);
+			new UserDAO().cancelRetweet(user, tweet);
 		}
 	}
 	
