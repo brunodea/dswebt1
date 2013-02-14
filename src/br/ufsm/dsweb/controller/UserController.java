@@ -71,8 +71,9 @@ public class UserController implements Serializable {
 	}
 	public void editprofile() {
 		UserDAO udao = new UserDAO();
-		User curr = mDumbUser;
-		mDumbUser.setID(getCurrentUser().getID());
+		User curr = getCurrentUser();
+		curr.setFullname(getDumbUser().getFullname());
+		curr.setPassword(getDumbUser().getPassword());
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success!", "Changes made with success.");
 		FacesContext.getCurrentInstance().addMessage(null, message);
 		udao.update(curr);
