@@ -9,7 +9,7 @@
         <div id="topmenu">
                 <div class="topmenuh">                 
 	            <a href="./profile.xhtml?username=#{userController.loggedUser.username}">  
-                        <h:outputText  styleClass="topnick" value="#{userController.loggedUser.fullname}"/>
+                    <h:outputText id="topmenuname" styleClass="topnick" value="#{userController.loggedUser.fullname}"/>
 	            </a>   
                 </div>
                 <div class="topmenuh">
@@ -46,7 +46,6 @@
                     </p:selectOneMenu>
                 </h:form>
                 </div>
-                
                 
         </div>
     </div>
