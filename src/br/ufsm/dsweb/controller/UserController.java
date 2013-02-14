@@ -44,7 +44,7 @@ public class UserController implements Serializable {
 		
 		User u = new UserDAO().login(getDumbUser().getUsername(), getDumbUser().getPassword());
 		if(u != null) {
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", u);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user_id", u.getID());
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml?username="+u.getUsername());
 				return;
@@ -59,7 +59,7 @@ public class UserController implements Serializable {
 	}
 	public void logout() {
 		if(isLogged()) {
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("user");
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("user_id");
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 				mDumbUser = new User();
@@ -131,7 +131,8 @@ public class UserController implements Serializable {
 	public User getLoggedUser() {
 		User user = null;
 		if(isLogged()) {
-			user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+			int user_id = (Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user_id");
+			user = new UserDAO().getByID(user_id);
 		}
 		return user;
 	}
@@ -146,7 +147,7 @@ public class UserController implements Serializable {
 	}
 	
 	public boolean isLogged() {
-		return FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("user");
+		return FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("user_id");
 	}
 	public boolean getIsLogged() {
 		return isLogged();

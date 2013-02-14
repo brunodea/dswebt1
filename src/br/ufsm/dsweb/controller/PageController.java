@@ -10,7 +10,7 @@ import javax.faces.context.FacesContext;
 @ViewScoped
 public class PageController implements Serializable {
 	public String getTopMenu() {
-		return (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("user")) ?
+		return (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("user_id")) ?
 				"./topmenulogged.xhtml" : "./topmenu.xhtml";
 	}
 }
