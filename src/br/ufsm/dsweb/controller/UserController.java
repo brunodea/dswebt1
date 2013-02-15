@@ -24,7 +24,7 @@ public class UserController implements Serializable {
 	private String mSearchQuery;
 	
 	public UserController() {
-		mDumbUser = new User();
+		mDumbUser = isLogged() ? getLoggedUser() : new User();
 	}
 	
 	public void signup() {
@@ -70,17 +70,19 @@ public class UserController implements Serializable {
 		}
 	}
 	public void editprofile() {
-		UserDAO udao = new UserDAO();
-		User curr = getCurrentUser();
-		curr.setFullname(getDumbUser().getFullname());
-		curr.setPassword(getDumbUser().getPassword());
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success!", "Changes made with success.");
-		FacesContext.getCurrentInstance().addMessage(null, message);
-		udao.update(curr);
-		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml?username="+curr.getUsername());
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(isLogged()) {
+			UserDAO udao = new UserDAO();
+			User curr = getLoggedUser();
+			curr.setFullname(getDumbUser().getFullname());
+			curr.setPassword(getDumbUser().getPassword());
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success!", "Changes made with success.");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			udao.update(curr);
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("profile.xhtml?username="+curr.getUsername());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

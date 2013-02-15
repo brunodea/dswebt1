@@ -85,30 +85,14 @@ public class UserDAO extends ModelDAO<User> {
 		if(!isFollowing(follower, to_follow)) {
 			follower.setFollowing(following(follower));
 			follower.getFollowing().add(to_follow);
-			try {
-				getEntityManager().getTransaction().begin();
-				getEntityManager().merge(follower);
-				getEntityManager().getTransaction().commit();
-			} catch(Exception e) {
-				e.printStackTrace();
-			} finally {
-				getEntityManager().close();
-			}
+			update(follower);
 		}
 	}
 	public synchronized void unfollow(User follower, User followed) {
 		if(isFollowing(follower, followed)) {
 			follower.setFollowing(following(follower));
 			follower.getFollowing().remove(followed);			
-			try {
-				getEntityManager().getTransaction().begin();
-				getEntityManager().merge(follower);
-				getEntityManager().getTransaction().commit();
-			} catch(Exception e) {
-				e.printStackTrace();
-			} finally {
-				getEntityManager().close();
-			}
+			update(follower);
 		}
 	}
 
